@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { motion, AnimatePresence } from "framer-motion";
-import Img1 from "../Images/c1.jpg";
-import Img2 from "../Images/c2.jpg";
-import Img3 from "../Images/c3.jpg";
+import Img1 from "../Images/q1.jpg";
+import Img2 from "../Images/q2.jpg";
+import Img3 from "../Images/q3.jpg";
 // import Img4 from "../Images/4.jpg";
 import { Colors } from "../Colors/ColorComponent";
 import Button from "../ReuseComponents/Button";

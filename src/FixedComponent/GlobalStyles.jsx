@@ -12,7 +12,7 @@ const GlobalStyle = createGlobalStyle`
   }
 
   body {
-    background-color: #fbf9f4;
+   background-color: ${Colors.pureWhite};
     color: #333;
     background-image: repeating-linear-gradient(
     to right, 

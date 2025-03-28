@@ -46,7 +46,7 @@ const Footer = () => {
           </IconWrapper>
         </StyledLink>
         <StyledLink
-          to="/products"
+          to="/storepage"
           active={activeLink === "products"}
           onClick={() => handleLinkClick("products")}
         >
@@ -54,6 +54,12 @@ const Footer = () => {
             <ShoppingOutlined />
             <IconName>Store</IconName>
           </ProductIconWrapper>
+        </StyledLink>
+        <StyledLink active={activeLink === "cart"} onClick={handleProfileClick}>
+          <IconWrapper className="profile-style">
+            <UserOutlined />
+            <IconName>Cart</IconName>
+          </IconWrapper>
         </StyledLink>
         <StyledLink
           to="/about"
@@ -63,15 +69,6 @@ const Footer = () => {
           <IconWrapper>
             <InfoCircleOutlined />
             <IconName>About</IconName>
-          </IconWrapper>
-        </StyledLink>
-        <StyledLink
-          active={activeLink === "profile"}
-          onClick={handleProfileClick}
-        >
-          <IconWrapper className="profile-style">
-            <UserOutlined />
-            <IconName>Profile</IconName>
           </IconWrapper>
         </StyledLink>
       </StyledFooter>

@@ -4,13 +4,13 @@ import Modal from "react-modal";
 import Masonry, { ResponsiveMasonry } from "react-responsive-masonry";
 import { motion } from "framer-motion";
 import { LeftOutlined, RightOutlined } from "@ant-design/icons";
-import Img1 from "../Images/c1.jpg";
-import Img2 from "../Images/c2.jpg";
-import Img3 from "../Images/c4.jpg";
-import Img4 from "../Images/c3.jpg";
-import Img5 from "../Images/c5.jpg";
-import Img6 from "../Images/c6.jpg";
-import Img7 from "../Images/c10.jpg";
+import Img1 from "../Images/q1.jpg";
+import Img2 from "../Images/q2.jpg";
+import Img3 from "../Images/q4.jpg";
+import Img4 from "../Images/q3.jpg";
+import Img5 from "../Images/q5.jpg";
+import Img6 from "../Images/q6.jpg";
+import Img7 from "../Images/q10.jpg";
 
 const images = [
   { id: 1, src: Img1 },

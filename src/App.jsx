@@ -10,6 +10,8 @@ import { Result, Button } from "antd";
 import Layout from "./FixedComponent/Layout";
 import GlobalStyle from "./FixedComponent/GlobalStyles";
 import Home from "./Pages/Home";
+import StorePage from "./Pages/StorePage";
+import SingleProduct from "./Pages/SingleProduct";
 
 const StyledResult = styled(Result)`
   .ant-result-title {
@@ -57,7 +59,6 @@ const routes = [
     children: [
       { index: true, path: "/", element: <Home /> },
 
-      // { path: "/projects/:imageId", element: <SingleProjectDetails /> },
       // {
       //   path: "/services",
       //   element: <ServicePage />,
@@ -65,7 +66,8 @@ const routes = [
       // },
       // { path: "/project", element: <ProjectPage /> },
 
-      // { path: "/service", element: <ServicePage />, key: "service" },
+      { path: "/storepage", element: <StorePage /> },
+      { path: "/products/:productId", element: <SingleProduct /> },
       // { path: "/contact", element: <ContactForm /> },
 
       // { path: "/blog", element: <BlogPage /> },

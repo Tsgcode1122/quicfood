@@ -6,13 +6,14 @@ import Footer from "./Footer";
 const Layout = () => {
   const location = useLocation();
 
-  const isAdminPage = location.pathname.startsWith("/admin");
+  const isStore = location.pathname.startsWith("/storepage");
   const isAll = location.pathname.startsWith("/allpost");
-  const isHomePage = location.pathname === "/";
+  const isStores = location.pathname === "/storepage";
 
   return (
     <>
-      <Navbar />
+      {!isStores && <Navbar />}
+
       <Outlet />
       <Footer />
     </>
