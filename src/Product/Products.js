@@ -26,7 +26,7 @@ const products = [
   {
     id: "A1B2C3D4",
     name: "Pounded Yam Flour",
-    img: img1,
+    img: img6,
     price: 25.99,
     category: "Flour & Grains",
     description:
@@ -71,7 +71,7 @@ const products = [
   {
     id: "U3V4W5X6",
     name: "Suya Spice Mix",
-    img: img6,
+    img: img1,
     price: 8.99,
     category: "Spices & Seasoning",
     description:
@@ -185,19 +185,11 @@ const products = [
     description:
       "Traditional fermented locust beans (iru) to enhance the umami depth in soups and stews.",
   },
-  {
-    id: "U3V2W1X9",
-    name: "Banga (Palm Fruit Concentrate)",
-    img: img19,
-    price: 17.99,
-    category: "Oils & Sauces",
-    description:
-      "Rich palm fruit concentrate for preparing authentic Banga soup, a Nigerian delicacy.",
-  },
+
   {
     id: "Y8Z7A6B5",
     name: "Kuli Kuli",
-    img: img20,
+    img: img22,
     price: 6.25,
     category: "Snacks",
     description:
@@ -206,16 +198,25 @@ const products = [
   {
     id: "C4D3E2F1",
     name: "Dried Periwinkle",
-    img: img21,
+    img: img19,
     price: 23.5,
     category: "Seafood",
     description:
       "Premium dried periwinkle for enhancing the flavor of soups, especially Afang and Edikang Ikong.",
   },
   {
+    id: "U3V2W1X9",
+    name: "Banga (Palm Fruit Concentrate)",
+    img: img21,
+    price: 17.99,
+    category: "Oils & Sauces",
+    description:
+      "Rich palm fruit concentrate for preparing authentic Banga soup, a Nigerian delicacy.",
+  },
+  {
     id: "G9H8I7J6",
     name: "Akamu (Fermented Corn Starch)",
-    img: img22,
+    img: img20,
     price: 12.25,
     category: "Flour & Grains",
     description:

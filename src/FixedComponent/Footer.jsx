@@ -55,8 +55,13 @@ const Footer = () => {
             <IconName>Store</IconName>
           </ProductIconWrapper>
         </StyledLink>
-        <StyledLink active={activeLink === "cart"} onClick={handleProfileClick}>
-          <IconWrapper className="profile-style">
+
+        <StyledLink
+          to="/cartpage"
+          active={activeLink === "cart"}
+          onClick={() => handleLinkClick("about")}
+        >
+          <IconWrapper>
             <UserOutlined />
             <IconName>Cart</IconName>
           </IconWrapper>

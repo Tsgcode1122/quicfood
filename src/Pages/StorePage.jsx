@@ -7,6 +7,9 @@ import {
 } from "@ant-design/icons";
 import { Link } from "react-router-dom";
 import { Colors, Shadows } from "../Colors/ColorComponent";
+import CartButton from "../ReuseComponents/CartButton";
+import CartItemCount from "../ReuseComponents/CartItemCount";
+import WishlistButton from "../ReuseComponents/WishlistButton";
 
 const StorePage = () => {
   const { products } = useProducts();
@@ -14,7 +17,7 @@ const StorePage = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [sortOption, setSortOption] = useState("None");
-
+  const [maxImageHeight, setMaxImageHeight] = useState(0);
   // Filtering & Sorting Logic
   useEffect(() => {
     let filtered = products.filter((product) => {
@@ -46,7 +49,9 @@ const StorePage = () => {
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
           />
-          <span>Cart</span>
+          <span>
+            Cart <CartItemCount />
+          </span>
         </CartegorySort>
         <CartegorySort>
           <CategorySelect
@@ -80,10 +85,17 @@ const StorePage = () => {
           filteredProducts.map((product) => (
             <ProductCard key={product.id}>
               <Link to={`/products/${product.id}`} className="link">
-                <img src={product.img} alt={product.name} />
-                <h3>{product.name}</h3>
-                <p>${product.price.toFixed(2)}</p>
+                <ImageContainer style={{ minHeight: maxImageHeight }}>
+                  <img src={product.img} alt={product.name} />
+                </ImageContainer>
+                <h5>{product.name}</h5>
               </Link>
+              <span>
+                <p>${product.price.toFixed(2)}</p>
+
+                <CartButton product={product} />
+                <WishlistButton product={product} />
+              </span>
             </ProductCard>
           ))
         ) : (
@@ -95,10 +107,22 @@ const StorePage = () => {
 };
 
 export default StorePage;
+
+const StyledButton = styled.div`
+  z-index: 19 !important;
+`;
+
 const Container = styled.div`
   padding-bottom: 3rem;
 `;
-
+const ImageContainer = styled.div`
+  @media screen and (max-width: 320px) {
+    /* min-height: 170px; */
+  }
+  @media (min-width: 321px) and (max-width: 499px) {
+    /* min-height: 220px; */
+  }
+`;
 const CartegorySort = styled.div`
   display: flex;
   justify-content: space-between;
@@ -179,32 +203,39 @@ const ProductCard = styled.div`
   background: ${Colors.pureWhite};
   box-shadow: ${Shadows.soft};
   border-radius: 8px;
-  padding: 10px;
+  padding: 5px;
   transition: transform 0.3s ease-in-out;
 
-  &:hover {
-    transform: scale(1.05);
-    box-shadow: ${Shadows.medium};
-  }
   img {
     width: 100%;
     height: auto;
 
     border-radius: 8px;
     margin-bottom: 10px;
+    &:hover {
+      transform: scale(1.05);
+      box-shadow: ${Shadows.medium};
+    }
   }
   a {
     text-decoration: none;
     color: ${Colors.black};
   }
 
-  h3 {
-    color: ${Colors.primaryRed};
+  h5 {
+    color: ${Colors.black};
+    font-size: 14px;
+    font-weight: 300;
+    margin: 0;
   }
 
   p {
     font-weight: bold;
-    color: ${Colors.deepMaroon};
+    color: ${Colors.black};
+  }
+  span {
+    display: flex;
+    justify-content: space-between;
   }
 `;
 

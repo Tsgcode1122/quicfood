@@ -12,6 +12,9 @@ import GlobalStyle from "./FixedComponent/GlobalStyles";
 import Home from "./Pages/Home";
 import StorePage from "./Pages/StorePage";
 import SingleProduct from "./Pages/SingleProduct";
+import CartPage from "./Pages/CartPage";
+import OrderConfirmation from "./Component/OrderConfirmation";
+import WishlistPage from "./Pages/WishlistPage";
 
 const StyledResult = styled(Result)`
   .ant-result-title {
@@ -70,7 +73,9 @@ const routes = [
       { path: "/products/:productId", element: <SingleProduct /> },
       // { path: "/contact", element: <ContactForm /> },
 
-      // { path: "/blog", element: <BlogPage /> },
+      { path: "/cartpage", element: <CartPage /> },
+      { path: "/order", element: <OrderConfirmation /> },
+      { path: "/wishlist", element: <WishlistPage /> },
       // { path: "/blog/:blogId", element: <ReadBlog /> },
 
       { path: "*", element: <InvalidPath /> },
