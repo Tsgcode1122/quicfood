@@ -1,11 +1,14 @@
 import React from "react";
 import Hero from "../Component/Hero";
 import Services from "../Component/Services";
-import Gallery from "../Component/Gallery";
+import BestSelling from "../Component/BestSelling";
+import NewItems from "../Component/NewItems";
 
 const Home = () => {
   return (
     <>
+      <NewItems />
+      <BestSelling />
       {/* <Services /> */}
       {/* <Hero /> */}
       {/* <Services /> */}

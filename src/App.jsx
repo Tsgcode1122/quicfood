@@ -15,6 +15,7 @@ import SingleProduct from "./Pages/SingleProduct";
 import CartPage from "./Pages/CartPage";
 import OrderConfirmation from "./Component/OrderConfirmation";
 import WishlistPage from "./Pages/WishlistPage";
+import About from "./Pages/About";
 
 const StyledResult = styled(Result)`
   .ant-result-title {
@@ -62,21 +63,14 @@ const routes = [
     children: [
       { index: true, path: "/", element: <Home /> },
 
-      // {
-      //   path: "/services",
-      //   element: <ServicePage />,
-      //   key: "service",
-      // },
-      // { path: "/project", element: <ProjectPage /> },
-
       { path: "/storepage", element: <StorePage /> },
       { path: "/products/:productId", element: <SingleProduct /> },
-      // { path: "/contact", element: <ContactForm /> },
 
       { path: "/cartpage", element: <CartPage /> },
       { path: "/order", element: <OrderConfirmation /> },
       { path: "/wishlist", element: <WishlistPage /> },
-      // { path: "/blog/:blogId", element: <ReadBlog /> },
+      { path: "/wishlist", element: <WishlistPage /> },
+      { path: "/about", element: <About /> },
 
       { path: "*", element: <InvalidPath /> },
 

@@ -9,13 +9,14 @@ const Layout = () => {
   const isStore = location.pathname.startsWith("/storepage");
   const isAll = location.pathname.startsWith("/allpost");
   const isStores = location.pathname === "/storepage";
+  const isCart = location.pathname === "/cartpage";
 
   return (
     <>
-      {!isStores && <Navbar />}
+      {!isStores && !isCart && <Navbar />}
 
       <Outlet />
-      <Footer />
+      {!isCart && <Footer />}
     </>
   );
 };

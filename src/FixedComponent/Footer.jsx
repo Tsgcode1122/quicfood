@@ -59,7 +59,7 @@ const Footer = () => {
         <StyledLink
           to="/cartpage"
           active={activeLink === "cart"}
-          onClick={() => handleLinkClick("about")}
+          onClick={() => handleLinkClick("cart")}
         >
           <IconWrapper>
             <UserOutlined />

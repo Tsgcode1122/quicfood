@@ -68,7 +68,7 @@ const ProductCard = styled.div`
 
   img {
     width: 100%;
-    height: auto;
+    height: 130px;
     border-radius: 8px;
     margin-bottom: 10px;
     &:hover {

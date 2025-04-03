@@ -75,6 +75,7 @@ const SingleProduct = () => {
 export default SingleProduct;
 const OtherPart = styled.div`
   position: fixed;
+  padding-bottom: 5rem;
   background-color: ${Colors.pureWhite};
   box-shadow:
     rgba(0, 0, 0, 0.25) 0px 50px 100px -20px,
