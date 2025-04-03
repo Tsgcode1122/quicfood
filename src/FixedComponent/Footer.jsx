@@ -9,7 +9,7 @@ import {
   UserOutlined,
   LoginOutlined,
 } from "@ant-design/icons";
-
+import { FiShoppingCart } from "react-icons/fi";
 const Footer = () => {
   const [activeLink, setActiveLink] = useState("");
 
@@ -62,7 +62,7 @@ const Footer = () => {
           onClick={() => handleLinkClick("cart")}
         >
           <IconWrapper>
-            <UserOutlined />
+            <FiShoppingCart />
             <IconName>Cart</IconName>
           </IconWrapper>
         </StyledLink>

@@ -32,16 +32,15 @@ const CartPage = () => {
           </Cancel1>
         </Top>
         <Height />
-
         {cart.length === 0 ? (
-          <EmptyCart>
+          <Empty>
             {" "}
-            <GiShoppingCart />
+            {/* <GiShoppingCart /> */}
             Your Cart is empty{" "}
             <ShopNow to="/storepage" style={{ color: "red" }}>
               Shop Now
             </ShopNow>
-          </EmptyCart>
+          </Empty>
         ) : (
           <>
             <CartContainer>
@@ -89,12 +88,11 @@ const CartPage = () => {
             <Height2 />
             <End>
               <PlaceOrder onClick={() => navigate("/order")}>
-                Place Order {""}
-                <span span> ${grandTotal.toFixed(2)}</span>
+                Place Order <span> ${grandTotal.toFixed(2)}</span>
               </PlaceOrder>
             </End>
           </>
-        )}
+        )}{" "}
       </Container>
     </Main>
   );
@@ -274,7 +272,7 @@ const PlaceOrder = styled.div`
   /* width: 100%; */
   background: red;
   padding: 1rem;
-  margin: 10px;
+  margin: 0 10px 10px 10px;
   color: #dedede;
   text-align: center;
   align-items: center;
@@ -283,13 +281,14 @@ const PlaceOrder = styled.div`
   width: 100%;
   span {
     font-weight: 700;
+    padding-left: 10px;
   }
 `;
 const End = styled.div`
   display: flex;
-  /* height: 5rem; */
-  /* margin-bottom: 10px; */
-  /* background-color: green; */
+  background: rgba(255, 255, 255, 0.1) !important;
+
+  backdrop-filter: blur(8px) !important;
   color: #dedede;
 
   align-items: center;
@@ -298,12 +297,22 @@ const End = styled.div`
   bottom: 0;
   width: 100%;
 `;
-const EmptyCart = styled.p`
+const Cart = styled.div`
   display: flex;
+  position: relative;
+  flex-direction: column;
+  align-items: center;
+
+  justify-content: center;
+`;
+const Empty = styled.p`
+  display: flex;
+  text-align: center;
   flex-direction: column;
   align-self: center;
   justify-content: center;
-  width: 100%;
+  margin-top: 200px;
+  margin-left: 200px;
   svg {
     font-size: 36px;
   }

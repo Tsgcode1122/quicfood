@@ -5,7 +5,7 @@ import {
   RouterProvider,
   useNavigate,
 } from "react-router-dom";
-
+// import "antd/dist/reset.css";
 import { Result, Button } from "antd";
 import Layout from "./FixedComponent/Layout";
 import GlobalStyle from "./FixedComponent/GlobalStyles";

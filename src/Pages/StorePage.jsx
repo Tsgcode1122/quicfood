@@ -1,16 +1,13 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { useProducts } from "../Context/ProductContext";
-import {
-  SortAscendingOutlined,
-  SortDescendingOutlined,
-} from "@ant-design/icons";
-import { Link } from "react-router-dom";
+import { FiShoppingCart } from "react-icons/fi";
+import { Link, useNavigate } from "react-router-dom";
 import { Colors, Shadows } from "../Colors/ColorComponent";
 import CartButton from "../ReuseComponents/CartButton";
 import CartItemCount from "../ReuseComponents/CartItemCount";
 import WishlistButton from "../ReuseComponents/WishlistButton";
-
+import { Spin } from "antd";
 const StorePage = () => {
   const { products } = useProducts();
   const [filteredProducts, setFilteredProducts] = useState([]);
@@ -18,8 +15,11 @@ const StorePage = () => {
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [sortOption, setSortOption] = useState("None");
   const [maxImageHeight, setMaxImageHeight] = useState(0);
+  const [loading, setLoading] = useState(true);
   // Filtering & Sorting Logic
+  const navigate = useNavigate();
   useEffect(() => {
+    setLoading(true);
     let filtered = products.filter((product) => {
       return (
         (selectedCategory === "All" ||
@@ -36,6 +36,7 @@ const StorePage = () => {
     }
 
     setFilteredProducts(filtered);
+    setLoading(false);
   }, [searchQuery, selectedCategory, sortOption, products]);
 
   return (
@@ -49,9 +50,12 @@ const StorePage = () => {
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
           />
-          <span>
-            Cart <CartItemCount />
-          </span>
+          <CartIconInner onClick={() => navigate("/cartpage")}>
+            <FiShoppingCart />
+            <ItemCount>
+              <CartItemCount />
+            </ItemCount>
+          </CartIconInner>
         </CartegorySort>
         <CartegorySort>
           <CategorySelect
@@ -81,9 +85,16 @@ const StorePage = () => {
 
       {/* Product Grid */}
       <ProductGrid>
-        {filteredProducts.length > 0 ? (
+        {loading ? (
+          <SpinnerContainer>
+            <Spin size="small" />
+          </SpinnerContainer>
+        ) : filteredProducts.length > 0 ? (
           filteredProducts.map((product) => (
             <ProductCard key={product.id}>
+              <Wishlist>
+                <WishlistButton product={product} />
+              </Wishlist>
               <Link to={`/products/${product.id}`} className="link">
                 <ImageContainer style={{ minHeight: maxImageHeight }}>
                   <img src={product.img} alt={product.name} />
@@ -94,7 +105,6 @@ const StorePage = () => {
                 <p>${product.price.toFixed(2)}</p>
 
                 <CartButton product={product} />
-                <WishlistButton product={product} />
               </span>
             </ProductCard>
           ))
@@ -107,9 +117,49 @@ const StorePage = () => {
 };
 
 export default StorePage;
+const SpinnerContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 200px;
+`;
+const CartIconInner = styled.div`
+  position: relative;
+  svg {
+    font-size: 22px;
+  }
+`;
 
+const ItemCount = styled.span`
+  position: absolute;
+  top: -14px;
+  right: -14px;
+  background-color: red;
+  color: white;
+  min-width: 25px;
+  min-height: 25px;
+
+  justify-content: center;
+  display: flex;
+  align-items: center;
+  border-radius: 50%;
+
+  font-size: 12px;
+`;
 const StyledButton = styled.div`
   z-index: 19 !important;
+`;
+const Wishlist = styled.div`
+  position: absolute;
+  top: 0%;
+  right: 0px;
+  z-index: 5;
+  display: flex;
+  flex-direction: column;
+  gap: 240px;
+  align-items: center;
+  height: 100%;
 `;
 
 const Container = styled.div`
@@ -200,10 +250,11 @@ const ProductGrid = styled.div`
 `;
 
 const ProductCard = styled.div`
+  position: relative;
   background: ${Colors.pureWhite};
-  box-shadow: ${Shadows.soft};
+  box-shadow: rgba(0, 0, 0, 0.06) 0px 2px 4px 0px;
   border-radius: 8px;
-  padding: 5px;
+
   transition: transform 0.3s ease-in-out;
 
   img {
@@ -214,7 +265,7 @@ const ProductCard = styled.div`
     border-radius: 8px;
     margin-bottom: 10px;
     &:hover {
-      transform: scale(1.05);
+      transform: scale(0.99);
       box-shadow: ${Shadows.medium};
     }
   }
@@ -228,6 +279,7 @@ const ProductCard = styled.div`
     font-size: 14px;
     font-weight: 300;
     margin: 0;
+    padding: 0 5px;
   }
 
   p {
@@ -236,7 +288,9 @@ const ProductCard = styled.div`
   }
   span {
     display: flex;
+    padding: 1px 0px 5px 5px;
     justify-content: space-between;
+    align-items: center;
   }
 `;
 
