@@ -35,16 +35,7 @@ const Footer = () => {
             <IconName>Home</IconName>
           </IconWrapper>
         </StyledLink>
-        <StyledLink
-          to="/wishlist"
-          active={activeLink === "wishlist"}
-          onClick={() => handleLinkClick("wishlist")}
-        >
-          <IconWrapper>
-            <HeartOutlined />
-            <IconName>Wishlist</IconName>
-          </IconWrapper>
-        </StyledLink>
+
         <StyledLink
           to="/storepage"
           active={activeLink === "products"}
@@ -67,6 +58,16 @@ const Footer = () => {
           </IconWrapper>
         </StyledLink>
         <StyledLink
+          to="/wishlist"
+          active={activeLink === "wishlist"}
+          onClick={() => handleLinkClick("wishlist")}
+        >
+          <IconWrapper>
+            <HeartOutlined />
+            <IconName>Wishlist</IconName>
+          </IconWrapper>
+        </StyledLink>
+        {/* <StyledLink
           to="/about"
           active={activeLink === "about"}
           onClick={() => handleLinkClick("about")}
@@ -75,7 +76,7 @@ const Footer = () => {
             <InfoCircleOutlined />
             <IconName>About</IconName>
           </IconWrapper>
-        </StyledLink>
+        </StyledLink> */}
       </StyledFooter>
     </>
   );
