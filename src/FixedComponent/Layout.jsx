@@ -18,7 +18,7 @@ const Layout = () => {
       {!isStores && !isWish && !isCart && !isSingle && !isOrder && <Navbar />}
 
       <Outlet />
-      {!isCart && <Footer />}
+      {<Footer />}
     </>
   );
 };

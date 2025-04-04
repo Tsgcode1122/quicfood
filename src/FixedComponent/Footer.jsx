@@ -9,6 +9,7 @@ import {
   UserOutlined,
   LoginOutlined,
 } from "@ant-design/icons";
+import CartItemCount from "../ReuseComponents/CartItemCount";
 import { FiShoppingCart } from "react-icons/fi";
 const Footer = () => {
   const [activeLink, setActiveLink] = useState("");
@@ -53,6 +54,10 @@ const Footer = () => {
           onClick={() => handleLinkClick("cart")}
         >
           <IconWrapper>
+            <ItemCount>
+              <CartItemCount />
+            </ItemCount>
+
             <FiShoppingCart />
             <IconName>Cart</IconName>
           </IconWrapper>
@@ -67,16 +72,6 @@ const Footer = () => {
             <IconName>Wishlist</IconName>
           </IconWrapper>
         </StyledLink>
-        {/* <StyledLink
-          to="/about"
-          active={activeLink === "about"}
-          onClick={() => handleLinkClick("about")}
-        >
-          <IconWrapper>
-            <InfoCircleOutlined />
-            <IconName>About</IconName>
-          </IconWrapper>
-        </StyledLink> */}
       </StyledFooter>
     </>
   );
@@ -104,6 +99,8 @@ const StyledLink = styled(Link)`
 
   svg {
     color: ${({ active }) => (active ? "red" : "black")};
+    margin: 0;
+    font-size: 22px;
   }
 `;
 
@@ -111,32 +108,31 @@ const IconWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  position: relative;
 `;
 
-const ProductIconWrapper = styled(IconWrapper)`
+const CartIconInner = styled.div`
   position: relative;
-  z-index: 2;
+`;
 
-  ::before {
-    content: "";
-    position: absolute;
-    top: -100%;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 80px;
-    height: 80px;
-    background-color: #ffffff;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    border-radius: 50%;
-    /* clip-path: circle(0 20%, 100% 0, 100% 100%, 0 100%); */
+const ItemCount = styled.span`
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  background-color: red;
+  color: white;
 
-    z-index: -1;
-  }
+  justify-content: center;
+  display: flex;
+  align-items: center;
+  border-radius: 5px;
+  padding: 2px;
+  font-size: 10px;
 `;
 
 const IconName = styled.span`
   font-size: 12px;
-  margin-top: 5px;
+  margin-top: 3px;
 `;
 
 export default Footer;

@@ -1,16 +1,16 @@
 import React, { useState, useRef, useEffect } from "react";
-
-import axios from "axios";
 import styled from "styled-components";
-import CartItemCount from "../../ReuseComponents/CartItemCount";
-
-import { FiShoppingCart } from "react-icons/fi";
+import { TbMenu3, TbX } from "react-icons/tb";
 import { useNavigate } from "react-router-dom";
 import { Colors } from "../../Colors/ColorComponent";
+
 const NavbarSmall = () => {
   const [prevScrollPos, setPrevScrollPos] = useState(window.scrollY);
   const [visible, setVisible] = useState(true);
+  const [showModal, setShowModal] = useState(false);
   const navigate = useNavigate();
+  const modalRef = useRef(null);
+
   const handleScroll = () => {
     const currentScrollPos = window.scrollY;
     setVisible(prevScrollPos > currentScrollPos || currentScrollPos < 10);
@@ -22,30 +22,66 @@ const NavbarSmall = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, [prevScrollPos, visible]);
 
+  // Close modal if clicked outside
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (modalRef.current && !modalRef.current.contains(event.target)) {
+        setShowModal(false);
+      }
+    };
+    if (showModal) {
+      document.addEventListener("mousedown", handleClickOutside);
+    } else {
+      document.removeEventListener("mousedown", handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [showModal]);
+
+  const handleToggleMenu = () => {
+    setShowModal((prev) => !prev);
+  };
+
+  const handleNavigate = (path) => {
+    navigate(path);
+    setShowModal(false);
+  };
+
   return (
     <>
       <StyledNavbar style={{ top: visible ? 0 : "-5rem" }}>
         <Logo>
-          Quic <span> Food</span>
+          Quic <span>Food</span>
         </Logo>
-        <CartIconInner onClick={() => navigate("/cartpage")}>
-          <FiShoppingCart />
-          <ItemCount>
-            <CartItemCount />
-          </ItemCount>
-        </CartIconInner>
+        <Menu onClick={handleToggleMenu}>
+          {showModal ? <TbX /> : <TbMenu3 />}
+        </Menu>
       </StyledNavbar>
+
+      <MenuModal $show={showModal} ref={modalRef}>
+        <ul>
+          <li onClick={() => handleNavigate("/about")}>About Us</li>
+          <li onClick={() => handleNavigate("/contact")}>Contact Us</li>
+        </ul>
+      </MenuModal>
+
       <div style={{ height: "3rem" }}></div>
     </>
   );
 };
-// Styled components
+
+// Styled Components
 const Logo = styled.div`
   color: black;
+  font-weight: bold;
+  font-size: 1.2rem;
   span {
     color: ${Colors.primaryRed};
   }
 `;
+
 const StyledNavbar = styled.nav`
   display: flex;
   position: fixed;
@@ -55,36 +91,47 @@ const StyledNavbar = styled.nav`
   padding: 1rem 1rem 0.5rem 1rem;
   align-items: center;
   justify-content: space-between;
-
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  transition: top 0.3s;
-  background: rgba(255, 255, 255, 0.1) !important;
-
+  background: rgba(255, 255, 255, 0.747) !important;
   backdrop-filter: blur(8px) !important;
+  transition: top 0.3s;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 `;
 
-const CartIconInner = styled.div`
-  position: relative;
+const Menu = styled.div`
+  cursor: pointer;
   svg {
-    font-size: 22px;
+    font-size: 24px;
   }
 `;
 
-const ItemCount = styled.span`
-  position: absolute;
-  top: -14px;
-  right: -14px;
-  background-color: red;
-  color: white;
-  min-width: 25px;
-  min-height: 25px;
+const MenuModal = styled.div`
+  position: fixed;
+  top: 3.2rem; /* start just below navbar */
+  right: ${({ $show }) => ($show ? "0" : "-100%")};
+  height: auto;
+  width: 140px;
+  background-color: white;
+  box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
+  transition: right 0.3s ease;
+  z-index: 998;
+  padding: 1rem 1rem;
+  border-radius: 10px;
+  ul {
+    list-style: none;
+    padding: 0;
+  }
 
-  justify-content: center;
-  display: flex;
-  align-items: center;
-  border-radius: 50%;
+  li {
+    padding: 0.5rem 0;
+    border-bottom: 1px solid #eee;
+    cursor: pointer;
+    color: ${Colors.black};
+    font-weight: 500;
 
-  font-size: 12px;
+    &:hover {
+      color: black;
+    }
+  }
 `;
 
 export default NavbarSmall;
