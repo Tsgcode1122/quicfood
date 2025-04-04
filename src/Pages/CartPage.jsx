@@ -114,7 +114,7 @@ const Insider = styled.div`
   justify-content: ${({ isEmpty }) => (isEmpty ? "center" : "flex-start")};
   align-items: ${({ isEmpty }) => (isEmpty ? "center" : "stretch")};
 
-  height: calc(100vh - 4.7rem); /* subtract Top bar */
+  height: calc(100vh - 8.7rem);
 `;
 const Empty = styled.div`
   font-size: 18px;

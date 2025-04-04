@@ -140,12 +140,12 @@ const ProductCard = styled.div`
   h5 {
     color: ${Colors.black};
     font-size: 14px;
-    font-weight: 300;
+    font-weight: 400;
     padding: 0 5px;
   }
 
   p {
-    font-weight: bold;
+    font-weight: bolder;
     color: ${Colors.black};
   }
 

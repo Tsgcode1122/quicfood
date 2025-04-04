@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { useProducts } from "../Context/ProductContext";
-import { FiShoppingCart } from "react-icons/fi";
+import { FiChevronDown } from "react-icons/fi";
 import { Link, useNavigate } from "react-router-dom";
 import { Colors, Shadows } from "../Colors/ColorComponent";
 import CartButton from "../ReuseComponents/CartButton";
-import CartItemCount from "../ReuseComponents/CartItemCount";
+import { FiSearch } from "react-icons/fi";
+
 import WishlistButton from "../ReuseComponents/WishlistButton";
 import { Spin } from "antd";
 const StorePage = () => {
@@ -40,54 +41,55 @@ const StorePage = () => {
   }, [searchQuery, selectedCategory, sortOption, products]);
 
   return (
-    <Container>
-      {/* Filter Section */}
-      <FilterContainer>
-        <CartegorySort>
-          <SearchInput
-            type="text"
-            placeholder="Search products..."
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-          />
-          <CartIconInner onClick={() => navigate("/cartpage")}>
-            <FiShoppingCart />
-            <ItemCount>
-              <CartItemCount />
-            </ItemCount>
-          </CartIconInner>
-        </CartegorySort>
-        <CartegorySort>
-          <SelectWrapper>
-            <CategorySelect
-              value={selectedCategory}
-              onChange={(e) => setSelectedCategory(e.target.value)}
-            >
-              <option value="All">All Categories</option>
-              <option value="Flour & Grains">Flour & Grains</option>
-              <option value="Oils & Sauces">Oils & Sauces</option>
-              <option value="Seeds & Nuts">Seeds & Nuts</option>
-              <option value="Seafood">Seafood</option>
-              <option value="Spices & Seasoning">Spices & Seasoning</option>
-              <option value="Vegetables">Vegetables</option>
-              <option value="Snacks">Snacks</option>
-              <option value="Spreads & Butters">Spreads & Butters</option>
-            </CategorySelect>
-          </SelectWrapper>
-          <SelectWrapper>
-            <SortSelect
-              value={sortOption}
-              onChange={(e) => setSortOption(e.target.value)}
-            >
-              <option value="None">Filter by</option>
-              <option value="LowToHigh">Price: Low to High</option>
-              <option value="HighToLow">Price: High to Low</option>
-            </SortSelect>
-          </SelectWrapper>
-        </CartegorySort>
-      </FilterContainer>
+    <>
+      <Container>
+        {/* Filter Section */}
+        <FilterContainer>
+          <CartegorySort>
+            <SearchWrapper>
+              <FiSearch className="search-icon" />
+              <SearchInput
+                type="text"
+                placeholder="Search products..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+              />
+            </SearchWrapper>
+          </CartegorySort>
+          <CartegorySort>
+            <SelectWrapper>
+              <CategorySelect
+                value={selectedCategory}
+                onChange={(e) => setSelectedCategory(e.target.value)}
+              >
+                <option value="All">All Categories</option>
+                <option value="Flour & Grains">Flour & Grains</option>
+                <option value="Oils & Sauces">Oils & Sauces</option>
+                <option value="Seeds & Nuts">Seeds & Nuts</option>
+                <option value="Seafood">Seafood</option>
+                <option value="Spices & Seasoning">Spices & Seasoning</option>
+                <option value="Vegetables">Vegetables</option>
+                <option value="Snacks">Snacks</option>
+                <option value="Spreads & Butters">Spreads & Butters</option>
+              </CategorySelect>
+              <DropdownIcon />
+            </SelectWrapper>
+            <SelectWrapper>
+              <SortSelect
+                value={sortOption}
+                onChange={(e) => setSortOption(e.target.value)}
+              >
+                <option value="None">Filter by</option>
+                <option value="LowToHigh">Price: Low to High</option>
+                <option value="HighToLow">Price: High to Low</option>
+              </SortSelect>
+              <DropdownIcon />
+            </SelectWrapper>
+          </CartegorySort>
+        </FilterContainer>
 
-      {/* Product Grid */}
+        {/* Product Grid */}
+      </Container>
       <ProductGrid>
         {loading ? (
           <SpinnerContainer>
@@ -116,7 +118,7 @@ const StorePage = () => {
           <NoResults>No products found.</NoResults>
         )}
       </ProductGrid>
-    </Container>
+    </>
   );
 };
 
@@ -124,46 +126,24 @@ export default StorePage;
 const SelectWrapper = styled.div`
   position: relative;
   display: inline-block;
-  &:after {
-    content: "▼";
-    font-size: 12px;
-    position: absolute;
-    right: 10px;
-    top: 50%;
-    transform: translateY(-50%);
-    pointer-events: none;
-    color: ${Colors.black};
-  }
 `;
+
+const DropdownIcon = styled(FiChevronDown)`
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  color: ${Colors.black};
+  font-size: 16px;
+`;
+
 const SpinnerContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
   width: 100%;
   height: 200px;
-`;
-const CartIconInner = styled.div`
-  position: relative;
-  svg {
-    font-size: 22px;
-  }
-`;
-
-const ItemCount = styled.span`
-  position: absolute;
-  top: -14px;
-  right: -14px;
-  background-color: red;
-  color: white;
-  min-width: 25px;
-  min-height: 25px;
-
-  justify-content: center;
-  display: flex;
-  align-items: center;
-  border-radius: 50%;
-
-  font-size: 12px;
 `;
 
 const Wishlist = styled.div`
@@ -196,17 +176,16 @@ const CartegorySort = styled.div`
 `;
 const FilterContainer = styled.div`
   background-color: #f6f6f6 !important;
+  z-index: 999;
   box-shadow:
     rgba(0, 0, 0, 0.12) 0px 1px 3px,
     rgba(0, 0, 0, 0.24) 0px 1px 2px;
   margin-bottom: 20px;
-  div {
-    display: flex;
-    justify-content: space-between;
-  }
+  position: fixed;
+  width: 100%;
   @media screen and (max-width: 499px) {
     border-radius: 0 0 20px 20px;
-    padding: 15px 20px;
+    padding: 15px 10px 10px 10px;
 
     display: flex;
     gap: 5px;
@@ -214,20 +193,31 @@ const FilterContainer = styled.div`
   }
 `;
 
+const SearchWrapper = styled.div`
+  position: relative;
+  width: 100%;
+  .search-icon {
+    position: absolute;
+    top: 50%;
+    left: 10px;
+    transform: translateY(-50%);
+    color: #aaa;
+    font-size: 18px;
+  }
+`;
+
 const SearchInput = styled.input`
-  padding: 10px;
+  padding: 10px 10px 10px 35px;
   border-radius: 10px;
-  border: 0.1px solid #ccc;
-  background-color: #f6f6f6;
+  border: 0.5px solid #ccc;
+  background-color: #ffffff;
+  width: 100%;
+  font-size: 16px;
+
   ::placeholder {
     font-style: italic !important;
     color: red;
-  }
-  @media screen and (max-width: 320px) {
-    min-width: 200px;
-  }
-  @media (min-width: 321px) and (max-width: 499px) {
-    min-width: 250px;
+    font-size: 14px;
   }
 `;
 
@@ -236,7 +226,7 @@ const CategorySelect = styled.select`
   border-radius: 5px;
   border: none !important;
   background-color: transparent !important;
-
+  font-size: 16px;
   color: ${Colors.black} !important;
   color: ${Colors.black}; /* Ensure text color is set */
   appearance: none; /* Hides the default dropdown arrow */
@@ -257,6 +247,22 @@ const SortSelect = styled.select`
   color: ${Colors.black} !important;
   background-color: transparent !important;
   max-width: 110px;
+  font-size: 16px;
+  &:focus {
+    border-color: #ccc !important;
+    box-shadow: none;
+  }
+
+  /* Remove hover effect */
+  &:hover {
+    border-color: #ccc !important;
+    border: none !important;
+  }
+
+  option {
+    font-weight: bold !important;
+    color: black !important;
+  }
 `;
 
 const ProductGrid = styled.div`
@@ -266,6 +272,7 @@ const ProductGrid = styled.div`
   padding: 14px;
 
   background-color: ${Colors.pureWhite};
+  padding-top: 5rem;
   padding-bottom: 5rem;
   position: relative;
   @media screen and (max-width: 499px) {
@@ -306,13 +313,13 @@ const ProductCard = styled.div`
   h5 {
     color: ${Colors.black};
     font-size: 14px;
-    font-weight: 300;
+    font-weight: 400;
     margin: 0;
     padding: 0 5px;
   }
 
   p {
-    font-weight: bold;
+    font-weight: bolder;
     color: ${Colors.black};
   }
   span {

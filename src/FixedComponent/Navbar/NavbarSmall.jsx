@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { TbMenu3, TbX } from "react-icons/tb";
 import { useNavigate } from "react-router-dom";
 import { Colors } from "../../Colors/ColorComponent";
-
+import logo from "../../Images/quiclogo.png";
 const NavbarSmall = () => {
   const [prevScrollPos, setPrevScrollPos] = useState(window.scrollY);
   const [visible, setVisible] = useState(true);
