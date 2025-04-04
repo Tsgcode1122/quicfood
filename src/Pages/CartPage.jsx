@@ -163,9 +163,9 @@ const Top = styled.div`
   width: 100%;
   padding: 10px 20px;
   z-index: 49;
-  box-shadow: rgba(114, 114, 114, 0.35) 0px -2px 8px 0px !important;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px -2px 8px 0px !important;
   border-radius: 29px 29px 0 0;
-  background: rgba(255, 255, 255, 0.1) !important;
+  background: rgba(156, 122, 122, 0.1) !important;
 
   backdrop-filter: blur(8px) !important;
 `;
