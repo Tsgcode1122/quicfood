@@ -1,79 +1,51 @@
-import React, { useState } from "react";
-import styled, { css } from "styled-components";
-import { Link } from "react-router-dom";
+import React from "react";
+import styled from "styled-components";
+import { Link, useLocation } from "react-router-dom";
 import {
   HomeOutlined,
   HeartOutlined,
   ShoppingOutlined,
-  InfoCircleOutlined,
-  UserOutlined,
-  LoginOutlined,
 } from "@ant-design/icons";
-import CartItemCount from "../ReuseComponents/CartItemCount";
 import { FiShoppingCart } from "react-icons/fi";
+import CartItemCount from "../ReuseComponents/CartItemCount";
+
 const Footer = () => {
-  const [activeLink, setActiveLink] = useState("");
-
-  const handleLinkClick = (link) => {
-    setActiveLink(link);
-  };
-
-  const handleProfileClick = () => {
-    setActiveLink("profile");
-    setModalVisible(true);
-  };
+  const location = useLocation();
+  const pathname = location.pathname;
 
   return (
-    <>
-      <StyledFooter>
-        <StyledLink
-          to="/"
-          active={activeLink === "home"}
-          onClick={() => handleLinkClick("home")}
-        >
-          <IconWrapper>
-            <HomeOutlined />
-            <IconName>Home</IconName>
-          </IconWrapper>
-        </StyledLink>
+    <StyledFooter>
+      <StyledLink to="/" active={pathname === "/"}>
+        <IconWrapper>
+          <HomeOutlined />
+          <IconName>Home</IconName>
+        </IconWrapper>
+      </StyledLink>
 
-        <StyledLink
-          to="/storepage"
-          active={activeLink === "products"}
-          onClick={() => handleLinkClick("products")}
-        >
-          <IconWrapper>
-            <ShoppingOutlined />
-            <IconName>Store</IconName>
-          </IconWrapper>
-        </StyledLink>
+      <StyledLink to="/storepage" active={pathname === "/storepage"}>
+        <IconWrapper>
+          <ShoppingOutlined />
+          <IconName>Store</IconName>
+        </IconWrapper>
+      </StyledLink>
 
-        <StyledLink
-          to="/cartpage"
-          active={activeLink === "cart"}
-          onClick={() => handleLinkClick("cart")}
-        >
-          <IconWrapper>
-            <ItemCount>
-              <CartItemCount />
-            </ItemCount>
+      <StyledLink to="/cartpage" active={pathname === "/cartpage"}>
+        <IconWrapper>
+          <ItemCount>
+            <CartItemCount />
+          </ItemCount>
+          <FiShoppingCart />
+          <IconName>Cart</IconName>
+        </IconWrapper>
+      </StyledLink>
 
-            <FiShoppingCart />
-            <IconName>Cart</IconName>
-          </IconWrapper>
-        </StyledLink>
-        <StyledLink
-          to="/wishlist"
-          active={activeLink === "wishlist"}
-          onClick={() => handleLinkClick("wishlist")}
-        >
-          <IconWrapper>
-            <HeartOutlined />
-            <IconName>Wishlist</IconName>
-          </IconWrapper>
-        </StyledLink>
-      </StyledFooter>
-    </>
+      <StyledLink to="/wishlist" active={pathname === "/wishlist"}>
+        <IconWrapper>
+          <HeartOutlined />
+          <IconName>Wishlist</IconName>
+        </IconWrapper>
+      </StyledLink>
+    </StyledFooter>
   );
 };
 
@@ -99,7 +71,6 @@ const StyledLink = styled(Link)`
 
   svg {
     color: ${({ active }) => (active ? "red" : "black")};
-    margin: 0;
     font-size: 22px;
   }
 `;
