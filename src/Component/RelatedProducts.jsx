@@ -99,7 +99,7 @@ const ProductCard = styled.div`
     font-size: 14px;
     font-weight: 300;
     margin: 0;
-    padding: 1px 0px 0px 5px;
+    padding: 0px 5px;
   }
 
   p {

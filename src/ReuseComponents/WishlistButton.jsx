@@ -3,8 +3,9 @@ import { CiHeart } from "react-icons/ci";
 import { message } from "antd";
 import styled from "styled-components";
 import { FaHeart } from "react-icons/fa6";
+import { useLocation } from "react-router-dom";
 
-const WishlistButton = ({ product }) => {
+const WishlistButton = ({ product, showTextButton = false }) => {
   const [isInWishlist, setIsInWishlist] = useState(false);
   const [messageApi, contextHolder] = message.useMessage();
 
@@ -14,8 +15,8 @@ const WishlistButton = ({ product }) => {
     setIsInWishlist(wishlist.some((item) => item.id === product.id));
   }, [product.id]);
 
-  // Add or remove product from wishlist
-  const toggleWishlist = () => {
+  // Add product to wishlist
+  const addToWishlist = () => {
     try {
       let wishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
 
@@ -41,26 +42,50 @@ const WishlistButton = ({ product }) => {
   return (
     <>
       {contextHolder} {/* Required for messages to work */}
-      <CustomButton onClick={toggleWishlist}>
-        {isInWishlist ? (
-          <FaHeart style={{ color: "red", fontSize: "18px" }} />
-        ) : (
-          <CiHeart style={{ color: "black", fontSize: "20px" }} />
-        )}
-      </CustomButton>
+      {showTextButton ? (
+        <WishlistTextButton onClick={addToWishlist} disabled={isInWishlist}>
+          {isInWishlist ? <span>Added to Wishlist</span> : "Add to Wishlist"}
+        </WishlistTextButton>
+      ) : (
+        <CustomButton onClick={addToWishlist}>
+          {isInWishlist ? (
+            <FaHeart style={{ color: "#EE4C59", fontSize: "18px" }} />
+          ) : (
+            <CiHeart style={{ color: "black", fontSize: "20px" }} />
+          )}
+        </CustomButton>
+      )}
     </>
   );
 };
 
 export default WishlistButton;
 
-const CustomButton = styled.div`
+const CustomButton = styled.button`
   background: #ffffff;
   cursor: pointer;
-  height: 20px;
-  width: 20px;
+  height: 30px;
+  width: 30px;
   border-radius: 5px;
   display: flex;
   align-items: center;
   justify-content: center;
+  border: none;
+`;
+
+const WishlistTextButton = styled.button`
+  background: #e0e0e080;
+  color: #000000;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 14px;
+  &:disabled {
+    background: #e5e5e5de;
+    cursor: not-allowed;
+  }
+  span {
+    color: #00000092;
+  }
 `;

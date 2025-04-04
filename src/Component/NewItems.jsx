@@ -24,6 +24,9 @@ const NewItems = () => {
         {newProducts.length > 0 ? (
           newProducts.map((product) => (
             <ProductCard key={product.id}>
+              <Wishlist>
+                <WishlistButton product={product} />
+              </Wishlist>
               <Link to={`/products/${product.id}`} className="link">
                 <ImageContainer>
                   <img src={product.img} alt={product.name} />
@@ -33,7 +36,6 @@ const NewItems = () => {
               <span>
                 <p>${product.price.toFixed(2)}</p>
                 <CartButton product={product} />
-                <WishlistButton product={product} />
               </span>
             </ProductCard>
           ))
@@ -46,6 +48,17 @@ const NewItems = () => {
 };
 
 export default NewItems;
+const Wishlist = styled.div`
+  position: absolute;
+  top: 0%;
+  right: 0px;
+  z-index: 5;
+  display: flex;
+  flex-direction: column;
+  gap: 240px;
+  align-items: center;
+  height: 100%;
+`;
 const Heading = styled.div`
   display: flex;
   align-items: center;
@@ -80,11 +93,12 @@ const CtaButton = styled(Link)`
 // Styled Components
 const ProductGrid = styled.div`
   display: grid;
+
   grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
   gap: 25px;
   padding: 14px;
   background-color: ${Colors.pureWhite};
-  padding-bottom: 5rem;
+  padding-bottom: 2rem;
   position: relative;
   @media screen and (max-width: 499px) {
     gap: 15px;
@@ -107,7 +121,8 @@ const ProductCard = styled.div`
   background: ${Colors.pureWhite};
   box-shadow: ${Shadows.soft};
   border-radius: 8px;
-  padding: 5px;
+
+  position: relative;
   transition: transform 0.3s ease-in-out;
 
   img {
@@ -116,7 +131,7 @@ const ProductCard = styled.div`
     border-radius: 8px;
     margin-bottom: 10px;
     &:hover {
-      transform: scale(1.05);
+      transform: scale(0.97);
       box-shadow: ${Shadows.medium};
     }
   }
@@ -125,7 +140,7 @@ const ProductCard = styled.div`
     color: ${Colors.black};
     font-size: 14px;
     font-weight: 300;
-    margin: 0;
+    padding: 0 5px;
   }
 
   p {
@@ -135,7 +150,9 @@ const ProductCard = styled.div`
 
   span {
     display: flex;
+    padding: 1px 0px 5px 5px;
     justify-content: space-between;
+    align-items: center;
   }
 `;
 

@@ -31,6 +31,9 @@ const BestSelling = () => {
         {bestSellingProducts.length > 0 ? (
           bestSellingProducts.map((product) => (
             <ProductCard key={product.id}>
+              <Wishlist>
+                <WishlistButton product={product} />
+              </Wishlist>
               <Link to={`/products/${product.id}`} className="link">
                 <ImageContainer>
                   <img src={product.img} alt={product.name} />
@@ -40,7 +43,6 @@ const BestSelling = () => {
               <span>
                 <p>${product.price.toFixed(2)}</p>
                 <CartButton product={product} />
-                <WishlistButton product={product} />
               </span>
             </ProductCard>
           ))
@@ -53,7 +55,17 @@ const BestSelling = () => {
 };
 
 export default BestSelling;
-
+const Wishlist = styled.div`
+  position: absolute;
+  top: 0%;
+  right: 0px;
+  z-index: 5;
+  display: flex;
+  flex-direction: column;
+  gap: 240px;
+  align-items: center;
+  height: 100%;
+`;
 const Heading = styled.div`
   display: flex;
   align-items: center;
@@ -110,9 +122,9 @@ const ProductCard = styled.div`
   background: ${Colors.pureWhite};
   box-shadow: ${Shadows.soft};
   border-radius: 8px;
-  padding: 5px;
-  transition: transform 0.3s ease-in-out;
 
+  transition: transform 0.3s ease-in-out;
+  position: relative;
   img {
     width: 100%;
     height: 130px;
@@ -128,7 +140,7 @@ const ProductCard = styled.div`
     color: ${Colors.black};
     font-size: 14px;
     font-weight: 300;
-    margin: 0;
+    padding: 0 5px;
   }
 
   p {
@@ -138,7 +150,9 @@ const ProductCard = styled.div`
 
   span {
     display: flex;
+    padding: 1px 0px 5px 5px;
     justify-content: space-between;
+    align-items: center;
   }
 `;
 

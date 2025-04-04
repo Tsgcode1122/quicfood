@@ -15,7 +15,7 @@ import WishlistButton from "../ReuseComponents/WishlistButton";
 const SingleProduct = () => {
   const { productId } = useParams();
   const product = products.find((p) => p.id === productId);
-
+  const [messageApi, contextHolder] = message.useMessage();
   const navigate = useNavigate();
 
   const { addToCart } = useContext(CartContext);
@@ -27,8 +27,9 @@ const SingleProduct = () => {
   }
 
   const handleAddToCart = () => {
-    addToCart({ ...product, quantity }); // ✅ Adds selected quantity
-    message.success(`${product.name} (x${quantity}) added to cart!`);
+    addToCart({ ...product, quantity });
+
+    messageApi.success(`${product.name} (x${quantity}) added to cart!`);
   };
 
   const back = () => {
@@ -36,44 +37,63 @@ const SingleProduct = () => {
   };
 
   return (
-    <Container>
-      <Top>
-        <Back onClick={back}>
-          <MdArrowBack />
-        </Back>
-        <Name>{product.name}</Name>
-        <CartIconInner onClick={() => navigate("/cartpage")}>
-          <FiShoppingCart />
-          <ItemCount>
-            <CartItemCount />
-          </ItemCount>
-        </CartIconInner>
-      </Top>
-      <Height />
-      {/* <div style={{ height: "1rem" }}></div> */}
-      <OtherPart>
-        <WishlistButton product={product} />
-        <img src={product.img} alt={product.name} />
-        <PriceAndQuantity>
-          <p>Price: ${product.price.toFixed(2)}</p>
-          <QuantityControl onQuantityChange={setQuantity} />
-        </PriceAndQuantity>
+    <>
+      {contextHolder}
+      <Container>
+        <Top>
+          <Back onClick={back}>
+            <MdArrowBack />
+          </Back>
+          <Name>{product.name}</Name>
+          <CartIconInner onClick={() => navigate("/cartpage")}>
+            <FiShoppingCart />
+            <ItemCount>
+              <CartItemCount />
+            </ItemCount>
+          </CartIconInner>
+        </Top>
+        <Height />
+        {/* <div style={{ height: "1rem" }}></div> */}
+        <OtherPart>
+          <img src={product.img} alt={product.name} />
+          <PriceAndQuantity>
+            <p>
+              Price: <span> ${product.price.toFixed(2)}</span>
+            </p>
+            <QuantityControl onQuantityChange={setQuantity} />
+          </PriceAndQuantity>
+          <DownButton>
+            <WishlistButton product={product} showTextButton={true} />
 
-        <Button onClick={handleAddToCart} type="primary">
-          Add to Cart
-        </Button>
-
-        <p>{product.description}</p>
-        <RelatedProducts
-          currentProductId={productId}
-          category={product.category}
-        />
-      </OtherPart>
-    </Container>
+            <CustomButton onClick={handleAddToCart} type="primary">
+              Add to Cart
+            </CustomButton>
+          </DownButton>
+          <Description>{product.description}</Description>
+          <RelatedProducts
+            currentProductId={productId}
+            category={product.category}
+          />
+        </OtherPart>
+      </Container>
+    </>
   );
 };
 
 export default SingleProduct;
+const DownButton = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 0.5rem 0.5rem 0.5rem;
+`;
+const CustomButton = styled.div`
+  cursor: pointer;
+  background: ${Colors.primaryRed};
+  border-radius: 10px;
+  padding: 5px 10px;
+`;
 const CartIconInner = styled.div`
   position: relative;
   svg {
@@ -174,9 +194,19 @@ const PriceAndQuantity = styled.div`
   align-items: center;
   justify-content: space-between;
   padding: 20px 10px;
+  p {
+    font-size: 16px;
+    span {
+      font-weight: 700;
+    }
+  }
 `;
 const Container = styled.div`
   img {
     max-width: 100%;
   }
+`;
+const Description = styled.p`
+  padding: 0 0.5rem 0.5rem 0.5rem;
+  font-size: 14px;
 `;
