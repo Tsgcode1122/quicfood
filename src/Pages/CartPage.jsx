@@ -114,16 +114,18 @@ const Insider = styled.div`
   justify-content: ${({ isEmpty }) => (isEmpty ? "center" : "flex-start")};
   align-items: ${({ isEmpty }) => (isEmpty ? "center" : "stretch")};
 
-  height: calc(100vh - 3.7rem); /* subtract Top bar */
+  height: calc(100vh - 4.7rem); /* subtract Top bar */
 `;
 const Empty = styled.div`
   font-size: 18px;
   color: #666;
+  font-weight: 700;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   gap: 10px;
+  margin-top: -14rem;
   width: 100vw;
   svg {
     font-size: 89px;
@@ -168,7 +170,7 @@ const Top = styled.div`
   z-index: 49;
   box-shadow: rgba(0, 0, 0, 0.35) 0px -2px 8px 0px !important;
   border-radius: 29px 29px 0 0;
-  background: rgba(156, 122, 122, 0.1) !important;
+  background: rgba(230, 230, 230, 0.871) !important;
 
   backdrop-filter: blur(8px) !important;
 `;

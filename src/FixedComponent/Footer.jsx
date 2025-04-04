@@ -118,7 +118,7 @@ const CartIconInner = styled.div`
 const ItemCount = styled.span`
   position: absolute;
   top: -4px;
-  right: -4px;
+  right: -8px;
   background-color: red;
   color: white;
 
@@ -126,6 +126,7 @@ const ItemCount = styled.span`
   display: flex;
   align-items: center;
   border-radius: 5px;
+  min-width: 20px;
   padding: 2px;
   font-size: 10px;
 `;

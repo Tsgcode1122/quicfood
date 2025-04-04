@@ -1,14 +1,15 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-import { Colors, Shadows } from "../Colors/ColorComponent";
+import { Colors } from "../Colors/ColorComponent";
 import products from "../Product/Products";
 
 const HeroSlider = () => {
   const [product, setProduct] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
+  const touchStartX = useRef(null);
+  const touchEndX = useRef(null);
 
-  // Pick 5 random products immediately
   useEffect(() => {
     if (products.length > 0) {
       const shuffled = [...products].sort(() => 0.5 - Math.random());
@@ -16,7 +17,6 @@ const HeroSlider = () => {
     }
   }, []);
 
-  // Auto-change slide every 5 seconds
   useEffect(() => {
     if (product.length > 0) {
       const interval = setInterval(() => {
@@ -26,10 +26,39 @@ const HeroSlider = () => {
     }
   }, [product]);
 
-  if (product.length === 0) return null; // Ensure nothing breaks if products are empty
+  const handleTouchStart = (e) => {
+    touchStartX.current = e.touches[0].clientX;
+  };
+
+  const handleTouchMove = (e) => {
+    touchEndX.current = e.touches[0].clientX;
+  };
+
+  const handleTouchEnd = () => {
+    if (!touchStartX.current || !touchEndX.current) return;
+    const delta = touchStartX.current - touchEndX.current;
+
+    if (delta > 50) {
+      // swipe left
+      setCurrentIndex((prev) => (prev + 1) % product.length);
+    } else if (delta < -50) {
+      // swipe right
+      setCurrentIndex((prev) => (prev - 1 + product.length) % product.length);
+    }
+
+    // reset values
+    touchStartX.current = null;
+    touchEndX.current = null;
+  };
+
+  if (product.length === 0) return null;
 
   return (
-    <HeroContainer>
+    <HeroContainer
+      onTouchStart={handleTouchStart}
+      onTouchMove={handleTouchMove}
+      onTouchEnd={handleTouchEnd}
+    >
       <Slide key={product[currentIndex].id}>
         <TextContent>
           <h2>{product[currentIndex].name}</h2>
@@ -61,9 +90,10 @@ const HeroSlider = () => {
 
 export default HeroSlider;
 
+// Styled Components
 const HeroContainer = styled.div`
   width: 100%;
-  padding: 2rem 0.5rem 3rem 0.5rem;
+  padding: 2rem 0.8rem 3rem 0.8rem;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -77,7 +107,7 @@ const Slide = styled.div`
   max-width: 1200px;
   display: grid;
   align-items: center;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 4.8fr 5.2fr;
   gap: 10px;
   transition: opacity 1s ease-in-out;
   background: #f0f0f0b2;
@@ -85,46 +115,57 @@ const Slide = styled.div`
 `;
 
 const TextContent = styled.div`
+  display: flex;
+  flex-direction: column;
+
   h2 {
     font-size: 20px;
     color: ${Colors.black};
-    margin-bottom: 10px;
     margin-left: 10px;
+    margin-bottom: 10px;
+    min-height: 3rem; /* Uniform height for title */
+    display: flex;
+    align-items: center;
   }
+
   p {
     font-size: 12px;
+    margin-left: 10px;
     color: ${Colors.gray};
     margin-bottom: 20px;
-    margin-left: 10px;
+    min-height: 4rem; /* Uniform height for description */
+    display: flex;
+    align-items: center;
   }
 `;
 
 const StyledLink = styled(Link)`
   background: ${Colors.primaryRed};
-  color: black;
+  color: white;
   padding: 10px 15px;
-  border-radius: 10px;
   margin-left: 10px;
+  border-radius: 10px;
   text-decoration: none;
+  width: fit-content;
   &:hover {
-    background: ${Colors.darkBlue};
+    color: white;
   }
 `;
 
 const ImageContainer = styled.div`
   width: 100%;
   display: flex;
-  align-items: center; /* Fix bottom padding issue */
+  align-items: center;
   justify-content: center;
   border-radius: 20px;
   clip-path: ellipse(95% 100% at 100% 50%);
 
   img {
     width: 100%;
-    height: 200px;
+    height: 210px;
     border-radius: 20px;
-    display: block; /* Prevent unwanted margin below */
     object-fit: cover;
+    display: block;
   }
 `;
 
@@ -133,7 +174,6 @@ const Indicators = styled.div`
   position: absolute;
   bottom: 15px;
   gap: 8px;
-  margin-top: 40px;
 `;
 
 const Indicator = styled.div`

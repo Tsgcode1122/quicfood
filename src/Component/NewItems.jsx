@@ -98,7 +98,7 @@ const ProductGrid = styled.div`
 
   grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
   gap: 25px;
-  padding: 14px;
+  padding: 0.8rem;
   background-color: ${Colors.pureWhite};
   padding-bottom: 2rem;
   position: relative;
