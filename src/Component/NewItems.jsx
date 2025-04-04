@@ -65,6 +65,7 @@ const Heading = styled.div`
   width: 100%;
   gap: 15px;
   padding: 1rem;
+  margin-top: 2rem;
   h4 {
     color: ${Colors.ashBlack};
     font-weight: 300;

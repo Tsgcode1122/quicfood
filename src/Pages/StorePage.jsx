@@ -147,9 +147,7 @@ const ItemCount = styled.span`
 
   font-size: 12px;
 `;
-const StyledButton = styled.div`
-  z-index: 19 !important;
-`;
+
 const Wishlist = styled.div`
   position: absolute;
   top: 0%;

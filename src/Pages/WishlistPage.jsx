@@ -56,36 +56,38 @@ const WishlistPage = () => {
             )}
           </Top>
           <Height />
-          {loading ? (
-            <SpinnerContainer>
-              <Spin size="small" />
-            </SpinnerContainer>
-          ) : wishlist.length === 0 ? (
-            <p>Your wishlist is empty.</p>
-          ) : (
-            <ProductList>
-              {wishlist.map((item) => (
-                <ProductCard key={item.id}>
-                  <Cancel onClick={() => removeFromWishlist(item.id)}>
-                    <MdClear />
-                  </Cancel>
-                  <Link to={`/products/${item.id}`}>
-                    <ImageContainer>
-                      <img src={item.img} alt={item.name} />
-                    </ImageContainer>
-                    <h5>{item.name}</h5>
-                  </Link>
-                  <div className="details">
-                    <span>
-                      <p>${item.price.toFixed(2)}</p>
+          <Insider isEmpty={!loading && wishlist.length === 0}>
+            {loading ? (
+              <SpinnerContainer>
+                <Spin size="small" />
+              </SpinnerContainer>
+            ) : wishlist.length === 0 ? (
+              <Empty>Your wishlist is empty.</Empty>
+            ) : (
+              <ProductList>
+                {wishlist.map((item) => (
+                  <ProductCard key={item.id}>
+                    <Cancel onClick={() => removeFromWishlist(item.id)}>
+                      <MdClear />
+                    </Cancel>
+                    <Link to={`/products/${item.id}`}>
+                      <ImageContainer>
+                        <img src={item.img} alt={item.name} />
+                      </ImageContainer>
+                      <h5>{item.name}</h5>
+                    </Link>
+                    <div className="details">
+                      <span>
+                        <p>${item.price.toFixed(2)}</p>
 
-                      <CartButton product={item} />
-                    </span>
-                  </div>
-                </ProductCard>
-              ))}
-            </ProductList>
-          )}
+                        <CartButton product={item} />
+                      </span>
+                    </div>
+                  </ProductCard>
+                ))}
+              </ProductList>
+            )}
+          </Insider>
         </Container>
       </Main>
     </>
@@ -113,6 +115,24 @@ const Cancel1 = styled.div`
     color: ${Colors.primaryRed};
   }
 `;
+const Insider = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: ${({ isEmpty }) => (isEmpty ? "center" : "flex-start")};
+  align-items: ${({ isEmpty }) => (isEmpty ? "center" : "stretch")};
+  height: calc(100vh - 3.7rem); /* subtract Top bar */
+`;
+
+const Empty = styled.div`
+  font-size: 18px;
+  color: #666;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 100vw;
+`;
+
 const Cancel = styled.div`
   position: absolute;
   top: 0%;

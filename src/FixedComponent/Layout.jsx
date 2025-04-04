@@ -11,10 +11,11 @@ const Layout = () => {
   const isStores = location.pathname === "/storepage";
   const isCart = location.pathname === "/cartpage";
   const isWish = location.pathname === "/wishlist";
+  const isOrder = location.pathname === "/order";
 
   return (
     <>
-      {!isStores && !isWish && !isCart && !isSingle && <Navbar />}
+      {!isStores && !isWish && !isCart && !isSingle && !isOrder && <Navbar />}
 
       <Outlet />
       {!isCart && <Footer />}

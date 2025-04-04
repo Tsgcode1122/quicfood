@@ -69,6 +69,7 @@ const SingleProduct = () => {
               Add to Cart
             </CustomButton>
           </DownButton>
+          <h5>Product Details</h5>
           <Description>{product.description}</Description>
           <RelatedProducts
             currentProductId={productId}
@@ -187,6 +188,9 @@ const OtherPart = styled.div`
     gap: 240px;
     align-items: center;
     height: 100%;
+  }
+  h5 {
+    padding: 1rem 0.5rem;
   }
 `;
 const PriceAndQuantity = styled.div`

@@ -131,7 +131,7 @@ const ProductCard = styled.div`
     border-radius: 8px;
     margin-bottom: 10px;
     &:hover {
-      transform: scale(1.05);
+      transform: scale(0.97);
       box-shadow: ${Shadows.medium};
     }
   }

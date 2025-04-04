@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { CartContext } from "../Context/CartContext";
 import products from "../Product/Products";
+
 import CartButton from "../ReuseComponents/CartButton";
 import { Colors, Shadows } from "../Colors/ColorComponent";
 import WishlistButton from "../ReuseComponents/WishlistButton";
@@ -16,33 +17,42 @@ const RelatedProducts = ({ category, currentProductId }) => {
     .slice(0, 4);
 
   return (
-    <ProductGrid>
-      {relatedProducts.length > 0 ? (
-        relatedProducts.map((product) => (
-          <ProductCard key={product.id}>
-            <Wishlist>
-              <WishlistButton product={product} />
-            </Wishlist>
-            <Link to={`/products/${product.id}`} className="link">
-              <ImageContainer>
-                <img src={product.img} alt={product.name} />
-              </ImageContainer>
-              <h5>{product.name}</h5>
-            </Link>
-            <span>
-              <p>${product.price.toFixed(2)}</p>
-              <CartButton product={product} />
-            </span>
-          </ProductCard>
-        ))
-      ) : (
-        <NoResults>No related products found.</NoResults>
-      )}
-    </ProductGrid>
+    <Container>
+      <p>Related Products</p>
+      <ProductGrid>
+        {relatedProducts.length > 0 ? (
+          relatedProducts.map((product) => (
+            <ProductCard key={product.id}>
+              <Wishlist>
+                <WishlistButton product={product} />
+              </Wishlist>
+              <Link to={`/products/${product.id}`} className="link">
+                <ImageContainer>
+                  <img src={product.img} alt={product.name} />
+                </ImageContainer>
+                <h5>{product.name}</h5>
+              </Link>
+              <span>
+                <p>${product.price.toFixed(2)}</p>
+                <CartButton product={product} />
+              </span>
+            </ProductCard>
+          ))
+        ) : (
+          <NoResults>No related products found.</NoResults>
+        )}
+      </ProductGrid>
+    </Container>
   );
 };
 
 export default RelatedProducts;
+const Container = styled.div`
+  p {
+    padding: 1rem 0.5rem;
+    font-weight: 700;
+  }
+`;
 const Wishlist = styled.div`
   position: absolute;
   top: 0%;
@@ -118,7 +128,7 @@ const NoResults = styled.div`
   text-align: center;
   font-size: 18px;
   color: red;
-  margin-top: 20px;
+  margin-top: 10px;
 `;
 
 const ImageContainer = styled.div`

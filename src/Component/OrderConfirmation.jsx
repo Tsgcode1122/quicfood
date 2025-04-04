@@ -2,6 +2,8 @@ import React, { useContext, useEffect } from "react";
 import { CartContext } from "../Context/CartContext";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
+import { Colors, Shadows } from "../Colors/ColorComponent";
+import { MdClear, MdArrowBack } from "react-icons/md";
 
 const OrderConfirmation = () => {
   const { cart, clearCart } = useContext(CartContext);
@@ -9,7 +11,7 @@ const OrderConfirmation = () => {
   // Redirect back to cart if empty
   useEffect(() => {
     if (cart.length === 0) {
-      navigate("/cart");
+      navigate("/storepage");
     }
   }, [cart, navigate]);
 
@@ -39,73 +41,136 @@ const OrderConfirmation = () => {
     if (cart.length === 0) return;
 
     window.open(contactLink, "_blank"); // Open the link in a new tab
-    clearCart(); // Clear the cart after clicking
+    clearCart();
   };
 
   return (
-    <Container>
-      <Back onClick={() => navigate(-1)}>Cancel</Back>
-      <h2>Confirm Your Order</h2>
-      {cart.length === 0 ? (
-        <p>Your cart is empty.</p>
-      ) : (
-        <>
-          <CartList>
-            {cart.map((item) => (
-              <CartItem key={item.id}>
-                <img src={item.img} alt={item.name} />
-                <div>
-                  <h3>{item.name}</h3>
-                  <p>Price: ${item.price.toFixed(2)}</p>
-                  <p>Quantity: {item.quantity}</p>
-                </div>
-              </CartItem>
-            ))}
-          </CartList>
+    <Main>
+      <Container>
+        <Top>
+          <Back onClick={() => navigate(-1)}>
+            <MdArrowBack />
+          </Back>
 
-          <h3>Choose an Order Method:</h3>
-          <OrderButtons>
-            <button
-              onClick={() =>
-                placeOrder(
-                  `https://wa.me/+2349078803521?text=${generateOrderMessage()}`,
-                )
-              }
-            >
-              📲 Order via WhatsApp (US)
-            </button>
-            <button
-              onClick={() =>
-                placeOrder(
-                  `https://wa.me/+2349012345678?text=${generateOrderMessage()}`,
-                )
-              }
-            >
-              📲 Order via WhatsApp (Nigeria)
-            </button>
-            <button
-              onClick={() =>
-                placeOrder("https://www.instagram.com/your_instagram_username/")
-              }
-            >
-              📸 Order via Instagram
-            </button>
-          </OrderButtons>
-        </>
-      )}
-    </Container>
+          <ConfirmHeading>Confirm Your Order</ConfirmHeading>
+        </Top>
+        <Height />
+        {cart.length === 0 ? (
+          <p>Your cart is empty.</p>
+        ) : (
+          <>
+            <CartContainer>
+              <CartList>
+                {cart.map((item) => (
+                  <CartItem key={item.id}>
+                    <img src={item.img} alt={item.name} />
+                    <div>
+                      <h5>{item.name}</h5>
+                      <p>Price: ${item.price.toFixed(2)}</p>
+                      <p>Quantity: {item.quantity}</p>
+                    </div>
+                  </CartItem>
+                ))}
+              </CartList>
+
+              <h3>Choose an Order Method:</h3>
+              <OrderButtons>
+                <button
+                  onClick={() =>
+                    placeOrder(
+                      `https://wa.me/+2349078803521?text=${generateOrderMessage()}`,
+                    )
+                  }
+                >
+                  📲 Order via WhatsApp (US)
+                </button>
+                <button
+                  onClick={() =>
+                    placeOrder(
+                      `https://wa.me/+2349078803521?text=${generateOrderMessage()}`,
+                    )
+                  }
+                >
+                  📲 Order via WhatsApp (Nigeria)
+                </button>
+                <button
+                  onClick={() =>
+                    placeOrder(
+                      "https://www.instagram.com/your_instagram_username/",
+                    )
+                  }
+                >
+                  📸 Order via Instagram
+                </button>
+              </OrderButtons>
+            </CartContainer>
+          </>
+        )}
+      </Container>
+    </Main>
   );
 };
 
 export default OrderConfirmation;
-const Back = styled.button``;
-const Container = styled.div`
-  padding: 20px;
-  max-width: 600px;
-  margin: auto;
-  text-align: center;
-`;
 
+const ConfirmHeading = styled.div`
+  color: #6f6f6f;
+`;
+const Height = styled.div`
+  height: 3rem;
+`;
+const CartContainer = styled.div`
+  width: 100vw;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding-bottom: 8rem;
+`;
+const Top = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: fixed;
+  width: 100%;
+  padding: 10px 20px;
+  z-index: 49;
+  box-shadow: rgba(114, 114, 114, 0.35) 0px -2px 8px 0px;
+  border-radius: 29px 29px 0 0;
+  /* background: rgba(255, 255, 255, 0.1) !important; */
+
+  backdrop-filter: blur(8px) !important;
+  background: ${Colors.pureWhite};
+`;
+const Back = styled.div`
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 30px;
+  box-shadow: ${Shadows.soft};
+  width: 30px;
+  border: 1px solid #e5e4e4;
+  svg {
+    font-size: 18px;
+  }
+`;
+const Main = styled.div`
+  /* background: #000000; */
+  padding-top: 1rem;
+`;
+const Container = styled.div`
+  background: white;
+  position: fixed;
+
+  overflow-y: auto;
+
+  height: 100%;
+
+  border-radius: 30px 30px 0 0;
+
+  max-width: 600px;
+`;
 const CartList = styled.div`
   margin-bottom: 20px;
 `;

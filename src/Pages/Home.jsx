@@ -4,6 +4,7 @@ import Services from "../Component/Services";
 import BestSelling from "../Component/BestSelling";
 import NewItems from "../Component/NewItems";
 import { message } from "antd";
+import HeroSlider from "../Component/HeroSlider";
 
 const Home = () => {
   useEffect(() => {
@@ -11,6 +12,7 @@ const Home = () => {
   }, []);
   return (
     <>
+      <HeroSlider />
       <NewItems />
       <BestSelling />
       {/* <Services /> */}

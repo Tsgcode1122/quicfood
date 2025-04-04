@@ -24,6 +24,7 @@ const Button = styled.button`
   &:hover {
     background: ${Colors.deepMaroon};
     transform: scale(1.05);
+    color: ${Colors.pureWhite};
   }
   z-index: 777;
 `;
