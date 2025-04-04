@@ -5,7 +5,7 @@ import { CartContext } from "../Context/CartContext";
 import products from "../Product/Products";
 import CartButton from "../ReuseComponents/CartButton";
 import { Colors, Shadows } from "../Colors/ColorComponent";
-
+import WishlistButton from "../ReuseComponents/WishlistButton";
 const RelatedProducts = ({ category, currentProductId }) => {
   // Filter products by category and exclude the current product
   const relatedProducts = products
@@ -20,6 +20,9 @@ const RelatedProducts = ({ category, currentProductId }) => {
       {relatedProducts.length > 0 ? (
         relatedProducts.map((product) => (
           <ProductCard key={product.id}>
+            <Wishlist>
+              <WishlistButton product={product} />
+            </Wishlist>
             <Link to={`/products/${product.id}`} className="link">
               <ImageContainer>
                 <img src={product.img} alt={product.name} />
@@ -40,7 +43,17 @@ const RelatedProducts = ({ category, currentProductId }) => {
 };
 
 export default RelatedProducts;
-
+const Wishlist = styled.div`
+  position: absolute;
+  top: 0%;
+  right: 0px;
+  z-index: 5;
+  display: flex;
+  flex-direction: column;
+  gap: 240px;
+  align-items: center;
+  height: 100%;
+`;
 const ProductGrid = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
@@ -63,7 +76,7 @@ const ProductCard = styled.div`
   background: ${Colors.pureWhite};
   box-shadow: ${Shadows.soft};
   border-radius: 8px;
-  padding: 5px;
+  position: relative;
   transition: transform 0.3s ease-in-out;
 
   img {
@@ -72,7 +85,7 @@ const ProductCard = styled.div`
     border-radius: 8px;
     margin-bottom: 10px;
     &:hover {
-      transform: scale(1.05);
+      transform: scale(0.97);
       box-shadow: ${Shadows.medium};
     }
   }
@@ -86,6 +99,7 @@ const ProductCard = styled.div`
     font-size: 14px;
     font-weight: 300;
     margin: 0;
+    padding: 1px 0px 0px 5px;
   }
 
   p {
@@ -96,6 +110,7 @@ const ProductCard = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
+    padding: 1px 0px 5px 5px;
   }
 `;
 
@@ -107,7 +122,6 @@ const NoResults = styled.div`
 `;
 
 const ImageContainer = styled.div`
-  min-height: 150px;
   display: flex;
   align-items: center;
   justify-content: center;

@@ -1,18 +1,27 @@
 import React, { useState, useEffect, useContext } from "react";
-import { Link } from "react-router-dom";
+
 import { CartContext } from "../Context/CartContext";
 import styled from "styled-components";
-import { Button, message } from "antd";
-import { Colors, Shadows } from "../Colors/ColorComponent";
+import { Spin, message } from "antd";
 
+import { Link, useNavigate } from "react-router-dom";
+
+import { Colors, Shadows } from "../Colors/ColorComponent";
+import { MdClear, MdArrowBack } from "react-icons/md";
+import { AiOutlineDelete } from "react-icons/ai";
+import CartButton from "../ReuseComponents/CartButton";
 const WishlistPage = () => {
   const [wishlist, setWishlist] = useState([]);
   const { addToCart } = useContext(CartContext);
-
+  const [messageApi, contextHolder] = message.useMessage();
+  const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
   // Load wishlist from localStorage
   useEffect(() => {
+    setLoading(true);
     const savedWishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
     setWishlist(savedWishlist);
+    setLoading(false);
   }, []);
 
   // Remove product from wishlist
@@ -25,80 +34,158 @@ const WishlistPage = () => {
   const clearWishlist = () => {
     localStorage.removeItem("wishlist");
     setWishlist([]);
-  };
-  // Handle adding product to cart
-  const handleAddToCart = (product) => {
-    addToCart(product);
-    message.success(`${product.name} added to cart`);
+    messageApi.success(`Wishlist cleared `);
   };
 
   return (
-    <Container>
-      <h2>Your Wishlist</h2>
-      {wishlist.length === 0 ? (
-        <p>Your wishlist is empty.</p>
-      ) : (
-        <ProductList>
-          {wishlist.map((item) => (
-            <ProductItem key={item.id}>
-              <Link to={`/products/${item.id}`}>
-                <img src={item.img} alt={item.name} />
-              </Link>
-              <div className="details">
-                <Link to={`/products/${item.id}`}>
-                  <h3>{item.name}</h3>
-                </Link>
-                <p>${item.price.toFixed(2)}</p>
-                <Button type="primary" onClick={() => handleAddToCart(item)}>
-                  Add to Cart
-                </Button>
-                <Button danger onClick={() => removeFromWishlist(item.id)}>
-                  Remove
-                </Button>
-              </div>
-            </ProductItem>
-          ))}
-        </ProductList>
-      )}
-      {wishlist.length === 0 ? (
-        ""
-      ) : (
-        <Button
-          danger
-          onClick={() => {
-            clearWishlist();
-            message.success("Wishlist cleared!");
-          }}
-          style={{ marginTop: "30px" }}
-        >
-          Clear Wishlist
-        </Button>
-      )}
-    </Container>
+    <>
+      {contextHolder}
+      <Main>
+        <Container>
+          <Top>
+            <Back onClick={() => navigate(-1)}>
+              <MdArrowBack />
+            </Back>
+            <div>Wish list</div>
+            {wishlist.length === 0 ? (
+              ""
+            ) : (
+              <Cancel1 danger onClick={clearWishlist}>
+                <AiOutlineDelete />
+              </Cancel1>
+            )}
+          </Top>
+          <Height />
+          {loading ? (
+            <SpinnerContainer>
+              <Spin size="small" />
+            </SpinnerContainer>
+          ) : wishlist.length === 0 ? (
+            <p>Your wishlist is empty.</p>
+          ) : (
+            <ProductList>
+              {wishlist.map((item) => (
+                <ProductCard key={item.id}>
+                  <Cancel onClick={() => removeFromWishlist(item.id)}>
+                    <MdClear />
+                  </Cancel>
+                  <Link to={`/products/${item.id}`}>
+                    <ImageContainer>
+                      <img src={item.img} alt={item.name} />
+                    </ImageContainer>
+                    <h5>{item.name}</h5>
+                  </Link>
+                  <div className="details">
+                    <span>
+                      <p>${item.price.toFixed(2)}</p>
+
+                      <CartButton product={item} />
+                    </span>
+                  </div>
+                </ProductCard>
+              ))}
+            </ProductList>
+          )}
+        </Container>
+      </Main>
+    </>
   );
 };
 
 export default WishlistPage;
-
-// Styled Components
-const Container = styled.div`
-  max-width: 800px;
-  margin: auto;
+const SpinnerContainer = styled.div`
   display: flex;
-  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 200px;
+`;
+const Cancel1 = styled.div`
+  border-radius: 50%;
+  display: flex;
   align-items: center;
   justify-content: center;
-  padding-bottom: 5rem;
+  height: 30px;
+  box-shadow: ${Shadows.soft};
+  width: 30px;
+  border: 1px solid #e5e4e4;
+  svg {
+    color: ${Colors.primaryRed};
+  }
 `;
+const Cancel = styled.div`
+  position: absolute;
+  top: 0%;
+  right: 0px;
+  z-index: 5;
+  display: flex;
+  background: #ffffff;
+  flex-direction: column;
+  height: 20px;
+  width: 20px;
+  border-radius: 5px;
+  align-items: center;
+
+  svg {
+    color: #810707c7;
+  }
+`;
+const Top = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: fixed;
+  width: 100%;
+  padding: 10px 20px;
+  z-index: 999;
+  box-shadow: rgba(114, 114, 114, 0.35) 0px -2px 8px 0px;
+  border-radius: 29px 29px 0 0;
+  /* background: rgba(255, 255, 255, 0.1) !important; */
+
+  backdrop-filter: blur(8px) !important;
+  background: ${Colors.pureWhite};
+`;
+const Back = styled.div`
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 30px;
+  box-shadow: ${Shadows.soft};
+  width: 30px;
+  border: 1px solid #e5e4e4;
+  svg {
+    font-size: 18px;
+  }
+`;
+
+const Height = styled.div`
+  height: 3.7rem;
+`;
+const Main = styled.div`
+  /* background: #000000; */
+  padding-top: 1rem;
+`;
+const Container = styled.div`
+  background: white;
+  position: fixed;
+
+  overflow-y: auto;
+
+  height: 100%;
+
+  border-radius: 30px 30px 0 0;
+`;
+// Styled Components
 
 const ProductList = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
   gap: 25px;
   padding: 14px;
-
+  width: 100vw;
   background-color: ${Colors.pureWhite};
-
+  padding-bottom: 6rem;
   position: relative;
   @media screen and (max-width: 499px) {
     gap: 15px;
@@ -110,53 +197,32 @@ const ProductList = styled.div`
   }
 `;
 
-const ProductItem = styled.div`
-  background: ${Colors.pureWhite};
-  box-shadow: ${Shadows.soft};
-  border-radius: 8px;
-  padding: 5px;
-  transition: transform 0.3s ease-in-out;
-  text-align: center;
-
-  img {
-    width: 100%;
-    height: 130px;
-    object-fit: cover;
-    border-radius: 8px;
-    cursor: pointer;
+const ImageContainer = styled.div`
+  @media screen and (max-width: 320px) {
+    /* min-height: 170px; */
   }
-
-  h3 {
-    font-size: 16px;
-    font-weight: 500;
-    margin: 10px 0;
-    cursor: pointer;
-    color: #1890ff;
-    text-decoration: none;
-  }
-
-  p {
-    font-size: 14px;
-    font-weight: bold;
-    margin: 5px 0;
-  }
-
-  button {
-    margin-top: 10px;
-    width: 100%;
+  @media (min-width: 321px) and (max-width: 499px) {
+    /* min-height: 220px; */
   }
 `;
-const ProductGrid = styled.div``;
 
 const ProductCard = styled.div`
+  position: relative;
+  background: ${Colors.pureWhite};
+  box-shadow: rgba(0, 0, 0, 0.06) 0px 2px 4px 0px;
+  border-radius: 8px;
+
+  transition: transform 0.3s ease-in-out;
+
   img {
     width: 100%;
-    height: auto;
+
+    height: 130px;
 
     border-radius: 8px;
     margin-bottom: 10px;
     &:hover {
-      transform: scale(1.05);
+      transform: scale(0.99);
       box-shadow: ${Shadows.medium};
     }
   }
@@ -170,6 +236,7 @@ const ProductCard = styled.div`
     font-size: 14px;
     font-weight: 300;
     margin: 0;
+    padding: 0 5px;
   }
 
   p {
@@ -178,6 +245,8 @@ const ProductCard = styled.div`
   }
   span {
     display: flex;
+    padding: 1px 0px 5px 5px;
     justify-content: space-between;
+    align-items: center;
   }
 `;
