@@ -21,7 +21,7 @@ const BestSelling = () => {
     <>
       <Heading>
         <h4>Best Selling</h4>
-        <Line />
+
         <CtaButton to="/storepage">
           View All
           <ArrowDownOutlined />
@@ -72,9 +72,10 @@ const Heading = styled.div`
   width: 100%;
   gap: 15px;
   padding: 1rem;
+  justify-content: space-between;
   h4 {
     color: ${Colors.ashBlack};
-    font-weight: 300;
+    font-weight: 600;
     white-space: nowrap;
   }
 `;
@@ -93,7 +94,7 @@ const CtaButton = styled(Link)`
   color: ${Colors.blue};
   gap: 3px;
   svg {
-    transform: rotate(-45deg);
+    transform: rotate(-135deg);
     color: ${Colors.blue};
   }
 `;

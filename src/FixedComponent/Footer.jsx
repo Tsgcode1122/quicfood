@@ -90,7 +90,7 @@ const StyledFooter = styled.footer`
   z-index: 999 !important;
   width: 100%;
   background-color: #ffffff;
-  border-top: 1px solid #b5b5b5;
+  border-top: 1px solid #b5b5b560;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   padding: 10px 0;
   display: flex;
