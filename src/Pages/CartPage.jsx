@@ -165,10 +165,9 @@ const Top = styled.div`
   z-index: 49;
   box-shadow: rgba(114, 114, 114, 0.35) 0px -2px 8px 0px !important;
   border-radius: 29px 29px 0 0;
-  background: rgba(76, 4, 4, 0.1) !important;
+  background: rgba(255, 255, 255, 0.1) !important;
 
   backdrop-filter: blur(8px) !important;
-  background: ${Colors.pureWhite};
 `;
 const Back = styled.div`
   border-radius: 50%;
