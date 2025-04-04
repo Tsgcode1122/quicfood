@@ -218,12 +218,16 @@ const CategorySelect = styled.select`
   border-radius: 5px;
   border: none !important;
   background-color: transparent !important;
+  appearance: auto;
+  color: ${Colors.black} !important;
 `;
 
 const SortSelect = styled.select`
   padding: 10px;
+  appearance: auto;
   border-radius: 5px;
   border: none !important;
+  color: ${Colors.black} !important;
   background-color: transparent !important;
   max-width: 110px;
 `;
