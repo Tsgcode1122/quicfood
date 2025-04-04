@@ -14,14 +14,14 @@ const GlobalStyle = createGlobalStyle`
   body {
    background-color: ${Colors.pureWhite};
     color: #333;
-    background-image: repeating-linear-gradient(
+    /* background-image: repeating-linear-gradient(
     to right, 
     transparent, 
     transparent 79px, 
     #e3e3e359 80px, 
     transparent 81px
   );
-  background-size: 100vw 100%;
+  background-size: 100vw 100%; */
   }
 
   h1 {

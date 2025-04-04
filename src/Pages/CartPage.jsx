@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { CartContext } from "../Context/CartContext";
 import { message, Button } from "antd";
 import styled from "styled-components";
@@ -10,6 +10,9 @@ import { GiShoppingCart } from "react-icons/gi";
 import { AiOutlineDelete } from "react-icons/ai";
 
 const CartPage = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  });
   const { cart, updateQuantity, removeFromCart, clearCart } =
     useContext(CartContext);
   const navigate = useNavigate();

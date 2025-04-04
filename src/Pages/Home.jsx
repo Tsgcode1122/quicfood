@@ -8,8 +8,9 @@ import HeroSlider from "../Component/HeroSlider";
 
 const Home = () => {
   useEffect(() => {
-    message.success("Test Message - If this shows, Ant Design message works.");
-  }, []);
+    window.scrollTo(0, 0);
+  });
+
   return (
     <>
       <HeroSlider />

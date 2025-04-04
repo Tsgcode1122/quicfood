@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import products from "../Product/Products"; // Make sure the path is correct
 import { FiShoppingCart } from "react-icons/fi";
@@ -13,6 +13,9 @@ import RelatedProducts from "../Component/RelatedProducts";
 import WishlistButton from "../ReuseComponents/WishlistButton";
 
 const SingleProduct = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  });
   const { productId } = useParams();
   const product = products.find((p) => p.id === productId);
   const [messageApi, contextHolder] = message.useMessage();

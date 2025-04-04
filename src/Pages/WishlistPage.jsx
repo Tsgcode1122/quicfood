@@ -11,6 +11,9 @@ import { MdClear, MdArrowBack } from "react-icons/md";
 import { AiOutlineDelete } from "react-icons/ai";
 import CartButton from "../ReuseComponents/CartButton";
 const WishlistPage = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  });
   const [wishlist, setWishlist] = useState([]);
   const { addToCart } = useContext(CartContext);
   const [messageApi, contextHolder] = message.useMessage();

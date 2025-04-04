@@ -58,28 +58,32 @@ const StorePage = () => {
           </CartIconInner>
         </CartegorySort>
         <CartegorySort>
-          <CategorySelect
-            value={selectedCategory}
-            onChange={(e) => setSelectedCategory(e.target.value)}
-          >
-            <option value="All">All Categories</option>
-            <option value="Flour & Grains">Flour & Grains</option>
-            <option value="Oils & Sauces">Oils & Sauces</option>
-            <option value="Seeds & Nuts">Seeds & Nuts</option>
-            <option value="Seafood">Seafood</option>
-            <option value="Spices & Seasoning">Spices & Seasoning</option>
-            <option value="Vegetables">Vegetables</option>
-            <option value="Snacks">Snacks</option>
-            <option value="Spreads & Butters">Spreads & Butters</option>
-          </CategorySelect>
-          <SortSelect
-            value={sortOption}
-            onChange={(e) => setSortOption(e.target.value)}
-          >
-            <option value="None">Filter by</option>
-            <option value="LowToHigh">Price: Low to High</option>
-            <option value="HighToLow">Price: High to Low</option>
-          </SortSelect>
+          <SelectWrapper>
+            <CategorySelect
+              value={selectedCategory}
+              onChange={(e) => setSelectedCategory(e.target.value)}
+            >
+              <option value="All">All Categories</option>
+              <option value="Flour & Grains">Flour & Grains</option>
+              <option value="Oils & Sauces">Oils & Sauces</option>
+              <option value="Seeds & Nuts">Seeds & Nuts</option>
+              <option value="Seafood">Seafood</option>
+              <option value="Spices & Seasoning">Spices & Seasoning</option>
+              <option value="Vegetables">Vegetables</option>
+              <option value="Snacks">Snacks</option>
+              <option value="Spreads & Butters">Spreads & Butters</option>
+            </CategorySelect>
+          </SelectWrapper>
+          <SelectWrapper>
+            <SortSelect
+              value={sortOption}
+              onChange={(e) => setSortOption(e.target.value)}
+            >
+              <option value="None">Filter by</option>
+              <option value="LowToHigh">Price: Low to High</option>
+              <option value="HighToLow">Price: High to Low</option>
+            </SortSelect>
+          </SelectWrapper>
         </CartegorySort>
       </FilterContainer>
 
@@ -117,6 +121,20 @@ const StorePage = () => {
 };
 
 export default StorePage;
+const SelectWrapper = styled.div`
+  position: relative;
+  display: inline-block;
+  &:after {
+    content: "▼";
+    font-size: 12px;
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+    color: ${Colors.black};
+  }
+`;
 const SpinnerContainer = styled.div`
   display: flex;
   justify-content: center;
@@ -218,13 +236,22 @@ const CategorySelect = styled.select`
   border-radius: 5px;
   border: none !important;
   background-color: transparent !important;
-  appearance: auto;
+
   color: ${Colors.black} !important;
+  color: ${Colors.black}; /* Ensure text color is set */
+  appearance: none; /* Hides the default dropdown arrow */
+  -webkit-appearance: none; /* Hide on Safari */
+  -moz-appearance: none; /* Hide on Firefox */
+  cursor: pointer;
 `;
 
 const SortSelect = styled.select`
   padding: 10px;
-  appearance: auto;
+  color: ${Colors.black}; /* Ensure text color is set */
+  appearance: none; /* Hides the default dropdown arrow */
+  -webkit-appearance: none; /* Hide on Safari */
+  -moz-appearance: none; /* Hide on Firefox */
+  cursor: pointer;
   border-radius: 5px;
   border: none !important;
   color: ${Colors.black} !important;

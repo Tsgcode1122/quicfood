@@ -6,6 +6,9 @@ import { Colors, Shadows } from "../Colors/ColorComponent";
 import { MdClear, MdArrowBack } from "react-icons/md";
 
 const OrderConfirmation = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  });
   const { cart, clearCart } = useContext(CartContext);
   const navigate = useNavigate();
   // Redirect back to cart if empty
