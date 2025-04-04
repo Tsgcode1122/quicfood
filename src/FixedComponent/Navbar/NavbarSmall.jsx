@@ -6,6 +6,7 @@ import CartItemCount from "../../ReuseComponents/CartItemCount";
 
 import { FiShoppingCart } from "react-icons/fi";
 import { useNavigate } from "react-router-dom";
+import { Colors } from "../../Colors/ColorComponent";
 const NavbarSmall = () => {
   const [prevScrollPos, setPrevScrollPos] = useState(window.scrollY);
   const [visible, setVisible] = useState(true);
@@ -24,7 +25,9 @@ const NavbarSmall = () => {
   return (
     <>
       <StyledNavbar style={{ top: visible ? 0 : "-5rem" }}>
-        <div>Quick Food</div>
+        <Logo>
+          Quic <span> Food</span>
+        </Logo>
         <CartIconInner onClick={() => navigate("/cartpage")}>
           <FiShoppingCart />
           <ItemCount>
@@ -37,7 +40,12 @@ const NavbarSmall = () => {
   );
 };
 // Styled components
-
+const Logo = styled.div`
+  color: black;
+  span {
+    color: ${Colors.primaryRed};
+  }
+`;
 const StyledNavbar = styled.nav`
   display: flex;
   position: fixed;
