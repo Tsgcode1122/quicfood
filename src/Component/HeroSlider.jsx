@@ -121,7 +121,7 @@ const ImageContainer = styled.div`
 
   img {
     width: 100%;
-    height: 180px;
+    height: 200px;
     border-radius: 20px;
     display: block; /* Prevent unwanted margin below */
     object-fit: cover;
