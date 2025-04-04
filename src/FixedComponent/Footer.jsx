@@ -41,10 +41,10 @@ const Footer = () => {
           active={activeLink === "products"}
           onClick={() => handleLinkClick("products")}
         >
-          <ProductIconWrapper>
+          <IconWrapper>
             <ShoppingOutlined />
             <IconName>Store</IconName>
-          </ProductIconWrapper>
+          </IconWrapper>
         </StyledLink>
 
         <StyledLink
