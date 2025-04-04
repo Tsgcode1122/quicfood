@@ -29,7 +29,7 @@ const CartPage = () => {
           <Back onClick={() => navigate(-1)}>
             <MdArrowBack />
           </Back>
-          <div>Order</div>
+          <div>Cart Items</div>
           {cart.length === 0 ? (
             <div></div>
           ) : (
