@@ -115,7 +115,7 @@ const MenuModal = styled.div`
   transition: right 0.3s ease;
   z-index: 998;
   padding: 1rem 1rem;
-  border-radius: 10px;
+  border-radius: 0 0 0 10px;
   ul {
     list-style: none;
     padding: 0;

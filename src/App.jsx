@@ -16,6 +16,7 @@ import CartPage from "./Pages/CartPage";
 import OrderConfirmation from "./Component/OrderConfirmation";
 import WishlistPage from "./Pages/WishlistPage";
 import About from "./Pages/About";
+import Contact from "./Pages/Contact";
 
 const StyledResult = styled(Result)`
   .ant-result-title {
@@ -71,6 +72,7 @@ const routes = [
       { path: "/wishlist", element: <WishlistPage /> },
       { path: "/wishlist", element: <WishlistPage /> },
       { path: "/about", element: <About /> },
+      { path: "/contact", element: <Contact /> },
 
       { path: "*", element: <InvalidPath /> },
 
