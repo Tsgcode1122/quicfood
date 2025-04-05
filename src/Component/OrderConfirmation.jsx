@@ -4,6 +4,7 @@ import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { Colors, Shadows } from "../Colors/ColorComponent";
 import { MdClear, MdArrowBack } from "react-icons/md";
+import { FaWhatsapp, FaInstagram } from "react-icons/fa";
 
 const OrderConfirmation = ({ isOpen, onClose }) => {
   const { cart, clearCart } = useContext(CartContext);
@@ -55,7 +56,7 @@ const OrderConfirmation = ({ isOpen, onClose }) => {
                 )
               }
             >
-              📲 Order via WhatsApp (US)
+              <FaWhatsapp /> Order via WhatsApp (US) <p></p>
             </button>
             <button
               onClick={() =>
@@ -64,14 +65,16 @@ const OrderConfirmation = ({ isOpen, onClose }) => {
                 )
               }
             >
-              📲 Order via WhatsApp (Nigeria)
+              <FaWhatsapp />
+              Order via WhatsApp (Nigeria)
+              <p></p>
             </button>
             <button
               onClick={() =>
                 placeOrder(`https://www.instagram.com/your_instagram_username/`)
               }
             >
-              📸 Order via Instagram
+              <FaInstagram /> Order via Instagram <p></p>
             </button>
           </OrderButtons>
         </CartContainer>
@@ -162,7 +165,9 @@ const OrderButtons = styled.div`
     border-radius: 5px;
     cursor: pointer;
     width: 100%;
-
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     &:nth-child(2) {
       background-color: #128c7e; /* Darker green for Nigeria */
     }
