@@ -51,8 +51,9 @@ const WishlistPage = () => {
               <MdArrowBack />
             </Back>
             <div>Wish list</div>
+
             {wishlist.length === 0 ? (
-              ""
+              <div></div>
             ) : (
               <Cancel1 danger onClick={clearWishlist}>
                 <AiOutlineDelete />
@@ -162,10 +163,7 @@ const Top = styled.div`
   width: 100%;
   padding: 10px 20px;
   z-index: 999;
-  box-shadow: rgba(0, 0, 0, 0.35) 0px -2px 8px 0px !important;
-  border-radius: 29px 29px 0 0;
-  background: rgba(234, 234, 234, 0.962) !important;
-
+  border-bottom: 1px solid #b5b5b560;
   backdrop-filter: blur(8px) !important;
   background: ${Colors.pureWhite};
 `;
@@ -186,10 +184,7 @@ const Back = styled.div`
 const Height = styled.div`
   height: 3.7rem;
 `;
-const Main = styled.div`
-  /* background: #000000; */
-  padding-top: 1rem;
-`;
+const Main = styled.div``;
 const Container = styled.div`
   background: white;
   position: fixed;

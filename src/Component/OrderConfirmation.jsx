@@ -37,7 +37,7 @@ const OrderConfirmation = ({ isOpen, onClose }) => {
   };
 
   return (
-    <ModalWrapper>
+    <ModalWrapper onClick={onClose}>
       <ModalContainer>
         <Top>
           <ConfirmHeading>
@@ -89,9 +89,7 @@ const ConfirmHeading = styled.div`
   color: #000000;
   font-weight: 500;
 `;
-const Height = styled.div`
-  height: 3rem;
-`;
+
 const CartContainer = styled.div`
   padding: 1rem;
   display: flex;
@@ -125,6 +123,7 @@ const Back = styled.div`
 const ModalWrapper = styled.div`
   position: fixed;
   inset: 0;
+  bottom: 0 !important;
   background: rgba(0, 0, 0, 0.6);
   z-index: 999 !important;
   display: flex;

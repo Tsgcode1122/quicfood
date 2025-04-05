@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Outlet, useLocation } from "react-router-dom";
 import Navbar from "./Navbar/Navbar";
 import Footer from "./Footer";
@@ -12,13 +12,14 @@ const Layout = () => {
   const isCart = location.pathname === "/cartpage";
   const isWish = location.pathname === "/wishlist";
   const isOrder = location.pathname === "/order";
+  const [showOrderModal, setShowOrderModal] = useState(false);
 
   return (
     <>
       {!isStores && !isWish && !isCart && !isSingle && !isOrder && <Navbar />}
 
       <Outlet />
-      {<Footer />}
+      {!showOrderModal && <Footer />}
     </>
   );
 };

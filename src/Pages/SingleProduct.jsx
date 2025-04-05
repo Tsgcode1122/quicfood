@@ -129,6 +129,9 @@ const Top = styled.div`
 
   position: fixed;
   padding: 1rem 1.2rem 0 0.6rem;
+  border-bottom: 1px solid #b5b5b560;
+  backdrop-filter: blur(8px) !important;
+  background: ${Colors.pureWhite};
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -142,10 +145,6 @@ const Name = styled.div`
   border-radius: 10px;
 
   padding: 10px;
-  box-shadow:
-    rgba(200, 200, 200, 0.25) 0px 30px 60px -12px inset,
-    rgba(254, 254, 254, 0.3) 0px 18px 36px -18px inset;
-  gap: 10px;
 `;
 const Back = styled.div`
   border-radius: 50%;
@@ -161,22 +160,13 @@ const Back = styled.div`
   }
 `;
 const OtherPart = styled.div`
-  position: fixed;
   padding-bottom: 5rem;
   background-color: ${Colors.pureWhite};
-  box-shadow:
-    rgba(0, 0, 0, 0.25) 0px 50px 100px -20px,
-    rgba(0, 0, 0, 0.3) 0px 30px 60px -30px,
-    rgba(0, 0, 0, 0.35) 0px -2px 6px 0px inset;
 
-  border-radius: 35px 35px 0 0;
-  margin-top: 0.95rem;
   left: 0;
   width: 100%;
   height: 100%;
-  z-index: -1;
 
-  overflow-y: auto;
   img {
     margin-bottom: 0;
   }

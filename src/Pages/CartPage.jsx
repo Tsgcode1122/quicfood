@@ -173,9 +173,8 @@ const Top = styled.div`
   width: 100%;
   padding: 10px 20px;
   z-index: 49;
-  box-shadow: rgba(0, 0, 0, 0.35) 0px -2px 8px 0px !important;
-  border-radius: 29px 29px 0 0;
-  background: rgba(230, 230, 230, 0.871) !important;
+  border-bottom: 1px solid #b5b5b560;
+  background: ${Colors.pureWhite};
 
   backdrop-filter: blur(8px) !important;
 `;
@@ -196,9 +195,7 @@ const Back = styled.div`
 const Height = styled.div`
   height: 3.7rem;
 `;
-const Main = styled.div`
-  padding-top: 1rem;
-`;
+const Main = styled.div``;
 const Container = styled.div`
   /* background: #000000; */
   position: fixed;

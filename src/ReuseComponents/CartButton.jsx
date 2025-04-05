@@ -26,7 +26,7 @@ const Button = styled.button`
     transform: scale(1.05);
     color: ${Colors.pureWhite};
   }
-  z-index: 777;
+  z-index: 10;
 `;
 
 const CartButton = ({ product }) => {
