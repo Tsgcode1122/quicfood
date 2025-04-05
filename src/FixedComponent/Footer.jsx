@@ -54,7 +54,7 @@ const StyledFooter = styled.footer`
   bottom: 0;
   right: 0;
   overflow-y: hidden;
-  z-index: 999 !important;
+  z-index: 89 !important;
   width: 100%;
   background-color: #ffffff;
   border-top: 1px solid #b5b5b560;

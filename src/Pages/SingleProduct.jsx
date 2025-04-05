@@ -74,21 +74,26 @@ const SingleProduct = () => {
         {/* <div style={{ height: "1rem" }}></div> */}
         <OtherPart>
           <img src={product.img} alt={product.name} />
-          <PriceAndQuantity>
-            <p>
-              Price: <span> ${product.price.toFixed(2)}</span>
-            </p>
-            <QuantityControl onQuantityChange={setQuantity} />
-          </PriceAndQuantity>
-          <DownButton>
-            <BuyNowButton onClick={handleBuyNow}>Buy Now</BuyNowButton>
+          <Content>
+            <PriceAndQuantity>
+              <p>
+                Price: <span> ${product.price.toFixed(2)}</span>
+              </p>
+              <QuantityControl onQuantityChange={setQuantity} />
+            </PriceAndQuantity>
+            <DownButton>
+              <BuyNowButton onClick={handleBuyNow}>Buy Now</BuyNowButton>
 
-            <CustomButton onClick={handleAddToCart} type="primary">
-              Add to Cart
-            </CustomButton>
-          </DownButton>
-          <h5>Product Details</h5>
-          <Description>{product.description}</Description>
+              <CustomButton onClick={handleAddToCart} type="primary">
+                Add to Cart
+              </CustomButton>
+            </DownButton>
+
+            <Description>
+              <h5>Product Details</h5>
+              <p>{product.description}</p>
+            </Description>
+          </Content>
           <RelatedProducts
             currentProductId={productId}
             category={product.category}
@@ -105,7 +110,6 @@ const DownButton = styled.div`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  padding: 0 0.5rem 0.5rem 0.5rem;
 `;
 const CustomButton = styled.div`
   cursor: pointer;
@@ -192,15 +196,12 @@ const OtherPart = styled.div`
     align-items: center;
     height: 100%;
   }
-  h5 {
-    padding: 1rem 0.5rem;
-  }
 `;
 const PriceAndQuantity = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 20px 10px;
+
   p {
     font-size: 16px;
     span {
@@ -208,12 +209,24 @@ const PriceAndQuantity = styled.div`
     }
   }
 `;
+const Content = styled.div`
+  padding: 20px 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+`;
 const Container = styled.div`
   img {
     max-width: 100%;
   }
 `;
 const Description = styled.p`
-  padding: 0 0.5rem 0.5rem 0.5rem;
-  font-size: 14px;
+  padding-top: 1rem;
+  p {
+    font-size: 14px;
+  }
+
+  h5 {
+    font-size: 16px;
+  }
 `;

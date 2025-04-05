@@ -5,23 +5,12 @@ import { useNavigate } from "react-router-dom";
 import { Colors, Shadows } from "../Colors/ColorComponent";
 import { MdClear, MdArrowBack } from "react-icons/md";
 
-const OrderConfirmation = () => {
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  });
+const OrderConfirmation = ({ isOpen, onClose }) => {
   const { cart, clearCart } = useContext(CartContext);
-  const navigate = useNavigate();
-  // Redirect back to cart if empty
-  useEffect(() => {
-    if (cart.length === 0) {
-      navigate("/storepage");
-    }
-  }, [cart, navigate]);
 
-  // Function to generate the order message
+  if (!isOpen) return null;
+
   const generateOrderMessage = () => {
-    if (cart.length === 0) return "Your cart is empty.";
-
     let message =
       "Hello, I want to place an order for the following items:\n\n";
     cart.forEach((item, index) => {
@@ -36,111 +25,82 @@ const OrderConfirmation = () => {
     );
     message += `\nTotal: $${totalPrice.toFixed(2)}`;
 
-    return encodeURIComponent(message); // Encode message for URLs
+    return encodeURIComponent(message);
   };
 
-  // Function to handle order placement and clear the cart
   const placeOrder = (contactLink) => {
     if (cart.length === 0) return;
-
-    window.open(contactLink, "_blank"); // Open the link in a new tab
+    window.open(contactLink, "_blank");
     clearCart();
+    onClose(); // close modal after placing order
   };
 
   return (
-    <Main>
-      <Container>
+    <ModalWrapper>
+      <ModalContainer>
         <Top>
-          <Back onClick={() => navigate(-1)}>
-            <MdArrowBack />
+          <ConfirmHeading>
+            <h3>Select Order Method:</h3>
+          </ConfirmHeading>
+          <Back onClick={onClose}>
+            <MdClear />
           </Back>
-
-          <ConfirmHeading>Confirm Your Order</ConfirmHeading>
         </Top>
-        <Height />
-        {cart.length === 0 ? (
-          <p>Your cart is empty.</p>
-        ) : (
-          <>
-            <CartContainer>
-              <CartList>
-                {cart.map((item) => (
-                  <CartItem key={item.id}>
-                    <img src={item.img} alt={item.name} />
-                    <div>
-                      <h5>{item.name}</h5>
-                      <p>Price: ${item.price.toFixed(2)}</p>
-                      <p>Quantity: {item.quantity}</p>
-                    </div>
-                  </CartItem>
-                ))}
-              </CartList>
-
-              <h3>Choose an Order Method:</h3>
-              <OrderButtons>
-                <button
-                  onClick={() =>
-                    placeOrder(
-                      `https://wa.me/+2349078803521?text=${generateOrderMessage()}`,
-                    )
-                  }
-                >
-                  📲 Order via WhatsApp (US)
-                </button>
-                <button
-                  onClick={() =>
-                    placeOrder(
-                      `https://wa.me/+2349078803521?text=${generateOrderMessage()}`,
-                    )
-                  }
-                >
-                  📲 Order via WhatsApp (Nigeria)
-                </button>
-                <button
-                  onClick={() =>
-                    placeOrder(
-                      "https://www.instagram.com/your_instagram_username/",
-                    )
-                  }
-                >
-                  📸 Order via Instagram
-                </button>
-              </OrderButtons>
-            </CartContainer>
-          </>
-        )}
-      </Container>
-    </Main>
+        <CartContainer>
+          <OrderButtons>
+            <button
+              onClick={() =>
+                placeOrder(
+                  `https://wa.me/+2349078803521?text=${generateOrderMessage()}`,
+                )
+              }
+            >
+              📲 Order via WhatsApp (US)
+            </button>
+            <button
+              onClick={() =>
+                placeOrder(
+                  `https://wa.me/+2349078803521?text=${generateOrderMessage()}`,
+                )
+              }
+            >
+              📲 Order via WhatsApp (Nigeria)
+            </button>
+            <button
+              onClick={() =>
+                placeOrder(`https://www.instagram.com/your_instagram_username/`)
+              }
+            >
+              📸 Order via Instagram
+            </button>
+          </OrderButtons>
+        </CartContainer>
+      </ModalContainer>
+    </ModalWrapper>
   );
 };
 
 export default OrderConfirmation;
 
 const ConfirmHeading = styled.div`
-  color: #6f6f6f;
+  color: #000000;
+  font-weight: 500;
 `;
 const Height = styled.div`
   height: 3rem;
 `;
 const CartContainer = styled.div`
-  width: 100vw;
   padding: 1rem;
   display: flex;
   flex-direction: column;
   gap: 10px;
-  padding-bottom: 8rem;
 `;
 const Top = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  position: fixed;
+
   width: 100%;
-  padding: 10px 20px;
-  z-index: 49;
-  box-shadow: rgba(0, 0, 0, 0.35) 0px -2px 8px 0px !important;
-  border-radius: 29px 29px 0 0;
-  background: rgba(156, 122, 122, 0.1) !important;
 
   backdrop-filter: blur(8px) !important;
   background: ${Colors.pureWhite};
@@ -158,53 +118,33 @@ const Back = styled.div`
     font-size: 18px;
   }
 `;
-const Main = styled.div`
-  /* background: #000000; */
-  padding-top: 1rem;
-`;
-const Container = styled.div`
-  background: white;
+
+const ModalWrapper = styled.div`
   position: fixed;
-
-  overflow-y: auto;
-
-  height: 100%;
-
-  border-radius: 30px 30px 0 0;
-
-  max-width: 600px;
-`;
-const CartList = styled.div`
-  margin-bottom: 20px;
-`;
-
-const CartItem = styled.div`
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 999 !important;
   display: flex;
-  align-items: center;
-  gap: 15px;
-  margin-bottom: 15px;
-  border-bottom: 1px solid #ddd;
-  padding-bottom: 10px;
+  justify-content: center;
+  align-items: flex-end;
+`;
 
-  img {
-    width: 80px;
-    height: 80px;
-    object-fit: cover;
-    border-radius: 5px;
-  }
-
-  div {
-    text-align: left;
-  }
-
-  h3 {
-    font-size: 16px;
-    margin: 0;
-  }
-
-  p {
-    margin: 5px 0;
-    font-size: 14px;
+const ModalContainer = styled.div`
+  background: white;
+  width: 100%;
+  max-width: 600px;
+  border-radius: 20px 20px 0 0;
+  padding: 1rem;
+  box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.1);
+  animation: slideUp 0.3s ease-out;
+  z-index: 999 !important;
+  @keyframes slideUp {
+    from {
+      transform: translateY(100%);
+    }
+    to {
+      transform: translateY(0);
+    }
   }
 `;
 

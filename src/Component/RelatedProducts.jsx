@@ -19,7 +19,7 @@ const RelatedProducts = ({ category, currentProductId }) => {
 
   return (
     <Container>
-      <p>Related Products</p>
+      <h3>Related Products</h3>
       <ProductGrid>
         {relatedProducts.length > 0 ? (
           relatedProducts.map((product) => (
@@ -49,10 +49,15 @@ const RelatedProducts = ({ category, currentProductId }) => {
 
 export default RelatedProducts;
 const Container = styled.div`
-  padding-bottom: 5rem;
+  padding: 1rem 0 5rem 10px;
   p {
-    padding: 1rem 0.5rem;
+    padding: 0 5px;
     font-weight: 700;
+  }
+  h3 {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 20px;
   }
 `;
 const Wishlist = styled.div`
@@ -69,7 +74,7 @@ const Wishlist = styled.div`
 const ProductGrid = styled.div`
   display: flex;
   gap: 15px;
-  padding: 1rem;
+
   background-color: ${Colors.pureWhite};
   padding-bottom: 2rem;
   position: relative;
@@ -77,7 +82,6 @@ const ProductGrid = styled.div`
   scroll-behavior: smooth;
   -webkit-overflow-scrolling: touch;
 
-  width: 100%;
   scroll-snap-type: x mandatory;
 
   &::-webkit-scrollbar {
@@ -109,6 +113,7 @@ const ProductCard = styled.div`
   box-shadow: rgba(0, 0, 0, 0.06) 0px 2px 4px 0px;
   border-radius: 8px;
   min-width: 160px;
+  max-width: 1px;
   transition: transform 0.3s ease-in-out;
 
   img {

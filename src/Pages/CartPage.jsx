@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { CartContext } from "../Context/CartContext";
 import { message, Button } from "antd";
 import styled from "styled-components";
@@ -8,11 +8,13 @@ import { Colors, Shadows } from "../Colors/ColorComponent";
 import { IoChevronBack } from "react-icons/io5";
 import { GiShoppingCart } from "react-icons/gi";
 import { AiOutlineDelete } from "react-icons/ai";
+import OrderConfirmation from "../Component/OrderConfirmation";
 
 const CartPage = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   });
+  const [showOrderModal, setShowOrderModal] = useState(false);
   const { cart, updateQuantity, removeFromCart, clearCart } =
     useContext(CartContext);
   const navigate = useNavigate();
@@ -26,7 +28,7 @@ const CartPage = () => {
     <Main>
       <Container>
         <Top>
-          <Back onClick={() => navigate(-1)}>
+          <Back onClick={() => navigate("/storepage")}>
             <MdArrowBack />
           </Back>
           <div>Cart Items</div>
@@ -96,10 +98,15 @@ const CartPage = () => {
             </Summary>
             <Height2 />
             <End>
-              <PlaceOrder onClick={() => navigate("/order")}>
+              <PlaceOrder onClick={() => setShowOrderModal(true)}>
                 Place Order <span> ${grandTotal.toFixed(2)}</span>
               </PlaceOrder>
             </End>
+
+            <OrderConfirmation
+              isOpen={showOrderModal}
+              onClose={() => setShowOrderModal(false)}
+            />
           </>
         )}{" "}
       </Container>

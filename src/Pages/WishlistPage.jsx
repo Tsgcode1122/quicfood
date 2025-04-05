@@ -47,7 +47,7 @@ const WishlistPage = () => {
       <Main>
         <Container>
           <Top>
-            <Back onClick={() => navigate(-1)}>
+            <Back onClick={() => navigate("/storepage")}>
               <MdArrowBack />
             </Back>
             <div>Wish list</div>
