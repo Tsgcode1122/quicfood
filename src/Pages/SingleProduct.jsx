@@ -48,12 +48,9 @@ const SingleProduct = () => {
             <MdArrowBack />
           </Back>
           <Name>{product.name}</Name>
-          <CartIconInner onClick={() => navigate("/cartpage")}>
-            <FiShoppingCart />
-            <ItemCount>
-              <CartItemCount />
-            </ItemCount>
-          </CartIconInner>
+          <>
+            <WishlistButton product={product} />
+          </>
         </Top>
         <Height />
         {/* <div style={{ height: "1rem" }}></div> */}
@@ -66,8 +63,6 @@ const SingleProduct = () => {
             <QuantityControl onQuantityChange={setQuantity} />
           </PriceAndQuantity>
           <DownButton>
-            <WishlistButton product={product} showTextButton={true} />
-
             <CustomButton onClick={handleAddToCart} type="primary">
               Add to Cart
             </CustomButton>
@@ -98,28 +93,7 @@ const CustomButton = styled.div`
   border-radius: 10px;
   padding: 5px 10px;
 `;
-const CartIconInner = styled.div`
-  position: relative;
-  svg {
-    font-size: 22px;
-  }
-`;
-const ItemCount = styled.span`
-  position: absolute;
-  top: -14px;
-  right: -14px;
-  background-color: red;
-  color: white;
-  min-width: 25px;
-  min-height: 25px;
 
-  justify-content: center;
-  display: flex;
-  align-items: center;
-  border-radius: 50%;
-
-  font-size: 12px;
-`;
 const Top = styled.div`
   width: 100%;
 

@@ -175,18 +175,14 @@ const CartegorySort = styled.div`
   align-items: center;
 `;
 const FilterContainer = styled.div`
-  background-color: #f6f6f6 !important;
+  background-color: #ffffff !important;
   z-index: 999;
-  box-shadow:
-    rgba(0, 0, 0, 0.12) 0px 1px 3px,
-    rgba(0, 0, 0, 0.24) 0px 1px 2px;
+  border-bottom: 1px solid #b5b5b560;
   margin-bottom: 20px;
   position: fixed;
   width: 100%;
+  padding: 15px 10px 5px 10px;
   @media screen and (max-width: 499px) {
-    border-radius: 0 0 20px 20px;
-    padding: 15px 10px 10px 10px;
-
     display: flex;
     gap: 5px;
     flex-direction: column;
