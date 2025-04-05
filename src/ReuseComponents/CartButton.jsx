@@ -11,22 +11,31 @@ const Button = styled.button`
   border: none;
   padding: 8px;
   font-size: 14px;
-  border-radius: 5px;
+  border-radius: 5px 0 0 5px;
   cursor: pointer;
   display: flex;
   align-items: center;
-  gap: 5px;
+  width: 30px;
+  /* height: 30px; */
   font-weight: bold;
   transition:
     background 0.3s ease,
     transform 0.2s ease;
-  box-shadow: rgba(0, 0, 0, 0.06) 0px 2px 4px 0px inset;
+
   &:hover {
     background: ${Colors.deepMaroon};
     transform: scale(1.05);
     color: ${Colors.pureWhite};
   }
   z-index: 10;
+  background: ${Colors.pureWhite};
+  box-shadow: rgba(0, 0, 0, 0.06) 0px 2px 4px 0px inset;
+  backdrop-filter: blur(8px) !important;
+  cursor: pointer;
+
+  svg {
+    font-size: 14px;
+  }
 `;
 
 const CartButton = ({ product }) => {

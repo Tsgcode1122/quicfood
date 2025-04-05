@@ -4,6 +4,7 @@ import { message } from "antd";
 import styled from "styled-components";
 import { FaHeart } from "react-icons/fa6";
 import { useLocation } from "react-router-dom";
+import { Colors } from "../Colors/ColorComponent";
 
 const WishlistButton = ({ product, showTextButton = false }) => {
   const [isInWishlist, setIsInWishlist] = useState(false);
@@ -62,15 +63,19 @@ const WishlistButton = ({ product, showTextButton = false }) => {
 export default WishlistButton;
 
 const CustomButton = styled.button`
-  background: #ffffff;
+  background: ${Colors.pureWhite};
+  box-shadow: rgba(0, 0, 0, 0.06) 0px 2px 4px 0px inset;
+  backdrop-filter: blur(8px) !important;
   cursor: pointer;
-  height: 30px;
-  width: 30px;
-  border-radius: 5px;
+  padding: 4px;
+  border-radius: 0 5px 0 5px;
   display: flex;
   align-items: center;
   justify-content: center;
   border: none;
+  svg {
+    font-size: 14px;
+  }
 `;
 
 const WishlistTextButton = styled.button`
@@ -78,7 +83,7 @@ const WishlistTextButton = styled.button`
   color: #000000;
   border: none;
   padding: 8px 16px;
-  border-radius: 10px;
+  border-radius: 0 10px 0;
   cursor: pointer;
   font-size: 14px;
   &:disabled {

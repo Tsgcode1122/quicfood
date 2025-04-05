@@ -25,7 +25,7 @@ import img23 from ".././Images/q23.jpg";
 const products = [
   {
     id: "A1B2C3D4",
-    name: "Pounded Yam Flour",
+    name: "Yam Flour",
     img: img6,
     price: 25.99,
     category: "Flour & Grains",
@@ -61,7 +61,7 @@ const products = [
   },
   {
     id: "Q8R9S1T2",
-    name: "Ogi (Pap Powder)",
+    name: "Ogi ",
     img: img5,
     price: 14.99,
     category: "Flour & Grains",
@@ -70,7 +70,7 @@ const products = [
   },
   {
     id: "U3V4W5X6",
-    name: "Suya Spice Mix",
+    name: "Suya Spice ",
     img: img1,
     price: 8.99,
     category: "Spices & Seasoning",
@@ -106,7 +106,7 @@ const products = [
   },
   {
     id: "K2L3M4N5",
-    name: "Gari (Cassava Flakes)",
+    name: "Gari ",
     img: img10,
     price: 19.75,
     category: "Flour & Grains",
@@ -151,7 +151,7 @@ const products = [
   },
   {
     id: "E5F4G3H2",
-    name: "Dried Ugu Leaves",
+    name: "Dried Ugu ",
     img: img15,
     price: 15.0,
     category: "Vegetables",
@@ -169,7 +169,7 @@ const products = [
   },
   {
     id: "M2N1O9P8",
-    name: "Dried Pepper Mix",
+    name: "Dried Pepper ",
     img: img17,
     price: 11.75,
     category: "Spices & Seasoning",
@@ -178,7 +178,7 @@ const products = [
   },
   {
     id: "Q7R6S5T4",
-    name: "Locust Beans (Iru)",
+    name: "Locust Beans ",
     img: img18,
     price: 9.5,
     category: "Spices & Seasoning",
@@ -206,7 +206,7 @@ const products = [
   },
   {
     id: "U3V2W1X9",
-    name: "Banga (Palm Fruit Concentrate)",
+    name: "Banga ",
     img: img21,
     price: 17.99,
     category: "Oils & Sauces",
@@ -215,7 +215,7 @@ const products = [
   },
   {
     id: "G9H8I7J6",
-    name: "Akamu (Fermented Corn Starch)",
+    name: "Akamu ",
     img: img20,
     price: 12.25,
     category: "Flour & Grains",
@@ -224,7 +224,7 @@ const products = [
   },
   {
     id: "K5L4M3N2",
-    name: "Pepper Soup Spice Blend",
+    name: "Pepper Soup ",
     img: img23,
     price: 10.99,
     category: "Spices & Seasoning",
