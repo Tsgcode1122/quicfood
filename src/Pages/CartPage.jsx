@@ -9,6 +9,7 @@ import { IoChevronBack } from "react-icons/io5";
 import { GiShoppingCart } from "react-icons/gi";
 import { AiOutlineDelete } from "react-icons/ai";
 import OrderConfirmation from "../Component/OrderConfirmation";
+import Footer from "../FixedComponent/Footer";
 
 const CartPage = () => {
   useEffect(() => {
@@ -25,92 +26,95 @@ const CartPage = () => {
   const grandTotal = subtotal; // You can add tax or shipping fees if needed
 
   return (
-    <Main>
-      <Container>
-        <Top>
-          <Back onClick={() => navigate("/storepage")}>
-            <MdArrowBack />
-          </Back>
-          <div>Cart Items</div>
+    <>
+      <Main>
+        <Container>
+          <Top>
+            <Back onClick={() => navigate("/storepage")}>
+              <MdArrowBack />
+            </Back>
+            <div>Cart Items</div>
+            {cart.length === 0 ? (
+              <div></div>
+            ) : (
+              <Cancel1 danger onClick={clearCart}>
+                <AiOutlineDelete />
+              </Cancel1>
+            )}
+          </Top>
+          <Height />
           {cart.length === 0 ? (
-            <div></div>
+            <Insider isEmpty={cart.length === 0}>
+              <Empty>
+                {" "}
+                <GiShoppingCart />
+                Your Cart is empty{" "}
+                <ShopNow to="/storepage" style={{ color: "red" }}>
+                  Shop Now
+                </ShopNow>
+              </Empty>
+            </Insider>
           ) : (
-            <Cancel1 danger onClick={clearCart}>
-              <AiOutlineDelete />
-            </Cancel1>
-          )}
-        </Top>
-        <Height />
-        {cart.length === 0 ? (
-          <Insider isEmpty={cart.length === 0}>
-            <Empty>
-              {" "}
-              <GiShoppingCart />
-              Your Cart is empty{" "}
-              <ShopNow to="/storepage" style={{ color: "red" }}>
-                Shop Now
-              </ShopNow>
-            </Empty>
-          </Insider>
-        ) : (
-          <>
-            <CartContainer>
-              {cart.map((item) => (
-                <CartItem key={item.id}>
-                  <img src={item.img} alt={item.name} />
-                  <Cancel onClick={() => removeFromCart(item.id)}>
-                    <MdClear />
-                  </Cancel>
-                  <div className="details">
-                    <h5>{item.name}</h5>
-                    <p>${item.price.toFixed(2)}</p>
-                    <QuantityControl>
-                      <CustomButton
-                        onClick={() =>
-                          updateQuantity(item.id, item.quantity - 1)
-                        }
-                        disabled={item.quantity <= 1}
-                      >
-                        -
-                      </CustomButton>
-                      <span>{item.quantity}</span>
-                      <CustomButton
-                        onClick={() =>
-                          updateQuantity(item.id, item.quantity + 1)
-                        }
-                      >
-                        +
-                      </CustomButton>
-                    </QuantityControl>
-                  </div>
-                </CartItem>
-              ))}
-            </CartContainer>
-            <Summary>
-              <Center>
-                <Subtotal>
-                  Subtotal: <span>${subtotal.toFixed(2)}</span>
-                </Subtotal>
-                <Total>
-                  Grand Total: <span>${grandTotal.toFixed(2)}</span>
-                </Total>
-              </Center>
-            </Summary>
-            <Height2 />
-            <End>
-              <PlaceOrder onClick={() => setShowOrderModal(true)}>
-                Place Order <span> ${grandTotal.toFixed(2)}</span>
-              </PlaceOrder>
-            </End>
+            <>
+              <CartContainer>
+                {cart.map((item) => (
+                  <CartItem key={item.id}>
+                    <img src={item.img} alt={item.name} />
+                    <Cancel onClick={() => removeFromCart(item.id)}>
+                      <MdClear />
+                    </Cancel>
+                    <div className="details">
+                      <h5>{item.name}</h5>
+                      <p>${item.price.toFixed(2)}</p>
+                      <QuantityControl>
+                        <CustomButton
+                          onClick={() =>
+                            updateQuantity(item.id, item.quantity - 1)
+                          }
+                          disabled={item.quantity <= 1}
+                        >
+                          -
+                        </CustomButton>
+                        <span>{item.quantity}</span>
+                        <CustomButton
+                          onClick={() =>
+                            updateQuantity(item.id, item.quantity + 1)
+                          }
+                        >
+                          +
+                        </CustomButton>
+                      </QuantityControl>
+                    </div>
+                  </CartItem>
+                ))}
+              </CartContainer>
+              <Summary>
+                <Center>
+                  <Subtotal>
+                    Subtotal: <span>${subtotal.toFixed(2)}</span>
+                  </Subtotal>
+                  <Total>
+                    Grand Total: <span>${grandTotal.toFixed(2)}</span>
+                  </Total>
+                </Center>
+              </Summary>
+              <Height2 />
+              <End>
+                <PlaceOrder onClick={() => setShowOrderModal(true)}>
+                  Place Order <span> ${grandTotal.toFixed(2)}</span>
+                </PlaceOrder>
+              </End>
 
-            <OrderConfirmation
-              isOpen={showOrderModal}
-              onClose={() => setShowOrderModal(false)}
-            />
-          </>
-        )}{" "}
-      </Container>
-    </Main>
+              <OrderConfirmation
+                isOpen={showOrderModal}
+                onClose={() => setShowOrderModal(false)}
+              />
+            </>
+          )}{" "}
+        </Container>
+      </Main>
+      {!showOrderModal && <Footer />}
+    </>
   );
 };
 
@@ -302,7 +306,7 @@ const PlaceOrder = styled.div`
   background: red;
   padding: 1rem;
   margin: 0 10px 10px 10px;
-  color: #dedede;
+  color: #ffffff;
   text-align: center;
   align-items: center;
   justify-content: center;

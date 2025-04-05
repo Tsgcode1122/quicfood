@@ -6,7 +6,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { Colors, Shadows } from "../Colors/ColorComponent";
 import CartButton from "../ReuseComponents/CartButton";
 import { FiSearch } from "react-icons/fi";
-
+import { Select } from "antd";
 import WishlistButton from "../ReuseComponents/WishlistButton";
 import { Spin } from "antd";
 const StorePage = () => {
@@ -17,6 +17,7 @@ const StorePage = () => {
   const [sortOption, setSortOption] = useState("None");
   const [maxImageHeight, setMaxImageHeight] = useState(0);
   const [loading, setLoading] = useState(true);
+  const { Option } = Select;
   // Filtering & Sorting Logic
   const navigate = useNavigate();
   useEffect(() => {
@@ -58,32 +59,33 @@ const StorePage = () => {
           </CartegorySort>
           <CartegorySort>
             <SelectWrapper>
-              <CategorySelect
+              <CustomSelect
                 value={selectedCategory}
-                onChange={(e) => setSelectedCategory(e.target.value)}
-              >
-                <option value="All">All Categories</option>
-                <option value="Flour & Grains">Flour & Grains</option>
-                <option value="Oils & Sauces">Oils & Sauces</option>
-                <option value="Seeds & Nuts">Seeds & Nuts</option>
-                <option value="Seafood">Seafood</option>
-                <option value="Spices & Seasoning">Spices & Seasoning</option>
-                <option value="Vegetables">Vegetables</option>
-                <option value="Snacks">Snacks</option>
-                <option value="Spreads & Butters">Spreads & Butters</option>
-              </CategorySelect>
-              <DropdownIcon />
+                onChange={(value) => setSelectedCategory(value)}
+                suffixIcon={<FiChevronDown />}
+                options={[
+                  { value: "All", label: "All Categories" },
+                  { value: "Flour & Grains", label: "Flour & Grains" },
+                  { value: "Oils & Sauces", label: "Oils & Sauces" },
+                  { value: "Seeds & Nuts", label: "Seeds & Nuts" },
+                  { value: "Seafood", label: "Seafood" },
+                  { value: "Spices & Seasoning", label: "Spices & Seasoning" },
+                  { value: "Vegetables", label: "Vegetables" },
+                  { value: "Snacks", label: "Snacks" },
+                  { value: "Spreads & Butters", label: "Spreads & Butters" },
+                ]}
+              />
             </SelectWrapper>
             <SelectWrapper>
-              <SortSelect
+              <CustomSelect
                 value={sortOption}
-                onChange={(e) => setSortOption(e.target.value)}
+                onChange={(value) => setSortOption(value)}
+                suffixIcon={<FiChevronDown />}
               >
-                <option value="None">Filter by</option>
-                <option value="LowToHigh">Price: Low to High</option>
-                <option value="HighToLow">Price: High to Low</option>
-              </SortSelect>
-              <DropdownIcon />
+                <Option value="None">Filter by Price</Option>
+                <Option value="LowToHigh">Price: Low to High</Option>
+                <Option value="HighToLow">Price: High to Low</Option>
+              </CustomSelect>
             </SelectWrapper>
           </CartegorySort>
         </FilterContainer>
@@ -125,12 +127,63 @@ const StorePage = () => {
 export default StorePage;
 const SelectWrapper = styled.div`
   position: relative;
-  display: inline-block;
+  width: 100%;
+  .search-icon {
+    /* position: absolute; */
+    /* top: 50%; */
+
+    /* transform: translateY(-50%); */
+    color: #030303;
+    font-size: 18px;
+  }
+`;
+const CustomSelect = styled(Select)`
+  width: 100%;
+
+  .ant-select-selector {
+    border: none !important;
+    background-color: transparent !important;
+    border-radius: 5px;
+    padding: 8px 10px !important;
+    color: ${Colors.black} !important;
+    font-size: 16px !important;
+    box-shadow: none !important;
+    display: flex !important;
+    align-items: center;
+    gap: 5px;
+  }
+
+  .ant-select-arrow {
+    right: 25px !important; /* Move icon closer */
+    color: ${Colors.black};
+    font-size: 18px;
+  }
+
+  .ant-select-selection-item {
+    font-weight: 500;
+  }
+
+  &:hover .ant-select-selector {
+    border: none !important;
+    box-shadow: none !important;
+  }
+
+  &.ant-select-focused .ant-select-selector {
+    box-shadow: none !important;
+  }
+
+  .ant-select-dropdown {
+    border-radius: 10px;
+  }
+
+  .ant-select-item-option-content {
+    font-weight: 500;
+  }
 `;
 
 const DropdownIcon = styled(FiChevronDown)`
   position: absolute;
-  right: 10px;
+  /* right: 10px; */
   top: 50%;
   transform: translateY(-50%);
   pointer-events: none;
@@ -172,7 +225,6 @@ const ImageContainer = styled.div`
 const CartegorySort = styled.div`
   display: flex;
   justify-content: space-between;
-  align-items: center;
 `;
 const FilterContainer = styled.div`
   background-color: #ffffff !important;
@@ -224,8 +276,8 @@ const CategorySelect = styled.select`
   background-color: transparent !important;
   font-size: 16px;
   color: ${Colors.black} !important;
-  color: ${Colors.black}; /* Ensure text color is set */
-  appearance: none; /* Hides the default dropdown arrow */
+  color: ${Colors.black};
+  appearance: none;
   -webkit-appearance: none; /* Hide on Safari */
   -moz-appearance: none; /* Hide on Firefox */
   cursor: pointer;
@@ -233,8 +285,8 @@ const CategorySelect = styled.select`
 
 const SortSelect = styled.select`
   padding: 10px;
-  color: ${Colors.black}; /* Ensure text color is set */
-  appearance: none; /* Hides the default dropdown arrow */
+  color: ${Colors.black};
+  appearance: none;
   -webkit-appearance: none; /* Hide on Safari */
   -moz-appearance: none; /* Hide on Firefox */
   cursor: pointer;
@@ -242,7 +294,7 @@ const SortSelect = styled.select`
   border: none !important;
   color: ${Colors.black} !important;
   background-color: transparent !important;
-  max-width: 110px;
+
   font-size: 16px;
   &:focus {
     border-color: #ccc !important;

@@ -64,8 +64,8 @@ export default WishlistButton;
 
 const CustomButton = styled.button`
   background: ${Colors.pureWhite};
-  box-shadow: rgba(0, 0, 0, 0.06) 0px 2px 4px 0px inset;
-  backdrop-filter: blur(8px) !important;
+  /* box-shadow: rgba(0, 0, 0, 0.06) 0px 2px 4px 0px inset; */
+  /* backdrop-filter: blur(8px) !important; */
   cursor: pointer;
   padding: 4px;
   border-radius: 0 5px 0 5px;
