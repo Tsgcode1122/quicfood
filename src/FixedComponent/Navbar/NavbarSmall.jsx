@@ -53,7 +53,7 @@ const NavbarSmall = () => {
     <>
       <StyledNavbar style={{ top: visible ? 0 : "-5rem" }}>
         <Logo>
-          Quic <span>Food</span>
+          Quic<span>Food</span>
         </Logo>
         <Menu onClick={handleToggleMenu}>
           {showModal ? <TbX /> : <TbMenu3 />}

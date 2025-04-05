@@ -37,7 +37,7 @@ const ProductCard = styled.div`
 
   p {
     font-weight: bolder;
-    color: ${Colors.black};
+    color: ${Colors.primaryRed};
   }
   span {
     display: flex;

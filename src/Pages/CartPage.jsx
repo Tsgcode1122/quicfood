@@ -303,7 +303,7 @@ const PlaceOrder = styled.div`
   border-radius: 40px;
   display: flex;
   /* width: 100%; */
-  background: red;
+  background: ${Colors.primaryRed};
   padding: 1rem;
   margin: 0 10px 10px 10px;
   color: #ffffff;
