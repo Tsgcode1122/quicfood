@@ -38,6 +38,24 @@ const SingleProduct = () => {
   const back = () => {
     navigate(-1);
   };
+  const generateSingleProductMessage = () => {
+    const message =
+      `Hello, I'm interested in buying this product:\n\n` +
+      `Product: ${product.name}\n` +
+      `Price: $${product.price.toFixed(2)}\n` +
+      `Quantity: ${quantity}\n\n` +
+      `Total: $${(product.price * quantity).toFixed(2)}`;
+
+    return encodeURIComponent(message);
+  };
+
+  const handleBuyNow = () => {
+    const phoneNumber = "2349078803521";
+    const message = generateSingleProductMessage();
+    const url = `https://wa.me/${phoneNumber}?text=${message}`;
+
+    window.open(url, "_blank");
+  };
 
   return (
     <>
@@ -63,6 +81,8 @@ const SingleProduct = () => {
             <QuantityControl onQuantityChange={setQuantity} />
           </PriceAndQuantity>
           <DownButton>
+            <BuyNowButton onClick={handleBuyNow}>Buy Now</BuyNowButton>
+
             <CustomButton onClick={handleAddToCart} type="primary">
               Add to Cart
             </CustomButton>
@@ -90,6 +110,12 @@ const DownButton = styled.div`
 const CustomButton = styled.div`
   cursor: pointer;
   background: ${Colors.primaryRed};
+  border-radius: 10px;
+  padding: 5px 10px;
+`;
+const BuyNowButton = styled.div`
+  cursor: pointer;
+  background: #ececec;
   border-radius: 10px;
   padding: 5px 10px;
 `;

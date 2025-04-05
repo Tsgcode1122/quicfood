@@ -39,8 +39,8 @@ const CartPage = () => {
           )}
         </Top>
         <Height />
-        <Insider isEmpty={cart.length === 0}>
-          {cart.length === 0 ? (
+        {cart.length === 0 ? (
+          <Insider isEmpty={cart.length === 0}>
             <Empty>
               {" "}
               <GiShoppingCart />
@@ -49,59 +49,59 @@ const CartPage = () => {
                 Shop Now
               </ShopNow>
             </Empty>
-          ) : (
-            <>
-              <CartContainer>
-                {cart.map((item) => (
-                  <CartItem key={item.id}>
-                    <img src={item.img} alt={item.name} />
-                    <Cancel onClick={() => removeFromCart(item.id)}>
-                      <MdClear />
-                    </Cancel>
-                    <div className="details">
-                      <h5>{item.name}</h5>
-                      <p>${item.price.toFixed(2)}</p>
-                      <QuantityControl>
-                        <CustomButton
-                          onClick={() =>
-                            updateQuantity(item.id, item.quantity - 1)
-                          }
-                          disabled={item.quantity <= 1}
-                        >
-                          -
-                        </CustomButton>
-                        <span>{item.quantity}</span>
-                        <CustomButton
-                          onClick={() =>
-                            updateQuantity(item.id, item.quantity + 1)
-                          }
-                        >
-                          +
-                        </CustomButton>
-                      </QuantityControl>
-                    </div>
-                  </CartItem>
-                ))}
-              </CartContainer>
-              <Summary>
-                <Center>
-                  <Subtotal>
-                    Subtotal: <span>${subtotal.toFixed(2)}</span>
-                  </Subtotal>
-                  <Total>
-                    Grand Total: <span>${grandTotal.toFixed(2)}</span>
-                  </Total>
-                </Center>
-              </Summary>
-              <Height2 />
-              <End>
-                <PlaceOrder onClick={() => navigate("/order")}>
-                  Place Order <span> ${grandTotal.toFixed(2)}</span>
-                </PlaceOrder>
-              </End>
-            </>
-          )}{" "}
-        </Insider>
+          </Insider>
+        ) : (
+          <>
+            <CartContainer>
+              {cart.map((item) => (
+                <CartItem key={item.id}>
+                  <img src={item.img} alt={item.name} />
+                  <Cancel onClick={() => removeFromCart(item.id)}>
+                    <MdClear />
+                  </Cancel>
+                  <div className="details">
+                    <h5>{item.name}</h5>
+                    <p>${item.price.toFixed(2)}</p>
+                    <QuantityControl>
+                      <CustomButton
+                        onClick={() =>
+                          updateQuantity(item.id, item.quantity - 1)
+                        }
+                        disabled={item.quantity <= 1}
+                      >
+                        -
+                      </CustomButton>
+                      <span>{item.quantity}</span>
+                      <CustomButton
+                        onClick={() =>
+                          updateQuantity(item.id, item.quantity + 1)
+                        }
+                      >
+                        +
+                      </CustomButton>
+                    </QuantityControl>
+                  </div>
+                </CartItem>
+              ))}
+            </CartContainer>
+            <Summary>
+              <Center>
+                <Subtotal>
+                  Subtotal: <span>${subtotal.toFixed(2)}</span>
+                </Subtotal>
+                <Total>
+                  Grand Total: <span>${grandTotal.toFixed(2)}</span>
+                </Total>
+              </Center>
+            </Summary>
+            <Height2 />
+            <End>
+              <PlaceOrder onClick={() => navigate("/order")}>
+                Place Order <span> ${grandTotal.toFixed(2)}</span>
+              </PlaceOrder>
+            </End>
+          </>
+        )}{" "}
       </Container>
     </Main>
   );
@@ -113,8 +113,6 @@ const Insider = styled.div`
   flex-direction: column;
   justify-content: ${({ isEmpty }) => (isEmpty ? "center" : "flex-start")};
   align-items: ${({ isEmpty }) => (isEmpty ? "center" : "stretch")};
-
-  height: calc(100vh - 8.7rem);
 `;
 const Empty = styled.div`
   font-size: 18px;
@@ -125,7 +123,7 @@ const Empty = styled.div`
   justify-content: center;
   align-items: center;
   gap: 10px;
-  margin-top: -14rem;
+  margin-top: 7rem;
   width: 100vw;
   svg {
     font-size: 89px;
@@ -245,8 +243,8 @@ const QuantityControl = styled.div`
   justify-content: space-between;
   background: #e0e0e080;
   border-radius: 30px;
-  width: 90px;
-  padding: 1px;
+  width: 100px;
+  padding: 2px;
   span {
     min-width: 20px;
     text-align: center;
@@ -323,7 +321,7 @@ const End = styled.div`
   align-items: center;
   justify-content: center;
   position: fixed;
-  bottom: 0;
+  bottom: 3.5rem;
   width: 100%;
 `;
 

@@ -6,7 +6,8 @@ import { Colors, Shadows } from "../Colors/ColorComponent";
 import CartButton from "../ReuseComponents/CartButton";
 import WishlistButton from "../ReuseComponents/WishlistButton";
 import products from "../Product/Products";
-
+import ProductCard from "../ReuseStyle/ProductCard";
+import ProductGrid from "../ReuseStyle/ProductGrid";
 const BestSelling = () => {
   const newProductIds = products.slice(0, 4).map((product) => product.id);
 
@@ -99,63 +100,7 @@ const CtaButton = styled(Link)`
   }
 `;
 
-const ProductGrid = styled.div`
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-  gap: 25px;
-  padding: 14px 0.8rem;
-  background-color: ${Colors.pureWhite};
-  padding-bottom: 5rem;
-  position: relative;
-  @media screen and (max-width: 499px) {
-    gap: 15px;
-    grid-template-columns: repeat(2, minmax(140px, 1fr));
-  }
-  .link {
-    text-decoration: none !important;
-    color: inherit !important;
-  }
-`;
-
 const ImageContainer = styled.div``;
-
-const ProductCard = styled.div`
-  background: ${Colors.pureWhite};
-  box-shadow: ${Shadows.soft};
-  border-radius: 8px;
-
-  transition: transform 0.3s ease-in-out;
-  position: relative;
-  img {
-    width: 100%;
-    height: 130px;
-    border-radius: 8px;
-    margin-bottom: 10px;
-    &:hover {
-      transform: scale(0.97);
-      box-shadow: ${Shadows.medium};
-    }
-  }
-
-  h5 {
-    color: ${Colors.black};
-    font-size: 14px;
-    font-weight: 400;
-    padding: 0 5px;
-  }
-
-  p {
-    font-weight: bolder;
-    color: ${Colors.black};
-  }
-
-  span {
-    display: flex;
-    padding: 1px 0px 5px 5px;
-    justify-content: space-between;
-    align-items: center;
-  }
-`;
 
 const NoResults = styled.p`
   text-align: center;

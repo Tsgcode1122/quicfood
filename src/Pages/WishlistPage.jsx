@@ -10,6 +10,7 @@ import { Colors, Shadows } from "../Colors/ColorComponent";
 import { MdClear, MdArrowBack } from "react-icons/md";
 import { AiOutlineDelete } from "react-icons/ai";
 import CartButton from "../ReuseComponents/CartButton";
+import ProductCard from "../ReuseStyle/ProductCard";
 const WishlistPage = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -59,38 +60,39 @@ const WishlistPage = () => {
             )}
           </Top>
           <Height />
-          <Insider isEmpty={!loading && wishlist.length === 0}>
-            {loading ? (
-              <SpinnerContainer>
-                <Spin size="small" />
-              </SpinnerContainer>
-            ) : wishlist.length === 0 ? (
-              <Empty>Your wishlist is empty.</Empty>
-            ) : (
-              <ProductList>
-                {wishlist.map((item) => (
-                  <ProductCard key={item.id}>
-                    <Cancel onClick={() => removeFromWishlist(item.id)}>
-                      <MdClear />
-                    </Cancel>
-                    <Link to={`/products/${item.id}`}>
-                      <ImageContainer>
-                        <img src={item.img} alt={item.name} />
-                      </ImageContainer>
-                      <h5>{item.name}</h5>
-                    </Link>
-                    <div className="details">
-                      <span>
-                        <p>${item.price.toFixed(2)}</p>
 
-                        <CartButton product={item} />
-                      </span>
-                    </div>
-                  </ProductCard>
-                ))}
-              </ProductList>
-            )}
-          </Insider>
+          {loading ? (
+            <SpinnerContainer>
+              <Spin size="small" />
+            </SpinnerContainer>
+          ) : wishlist.length === 0 ? (
+            <Insider isEmpty={!loading && wishlist.length === 0}>
+              <Empty>Your wishlist is empty.</Empty>
+            </Insider>
+          ) : (
+            <ProductList>
+              {wishlist.map((item) => (
+                <ProductCard key={item.id}>
+                  <Cancel onClick={() => removeFromWishlist(item.id)}>
+                    <MdClear />
+                  </Cancel>
+                  <Link to={`/products/${item.id}`}>
+                    <ImageContainer>
+                      <img src={item.img} alt={item.name} />
+                    </ImageContainer>
+                    <h5>{item.name}</h5>
+                  </Link>
+                  <div className="details">
+                    <span>
+                      <p>${item.price.toFixed(2)}</p>
+
+                      <CartButton product={item} />
+                    </span>
+                  </div>
+                </ProductCard>
+              ))}
+            </ProductList>
+          )}
         </Container>
       </Main>
     </>
@@ -123,7 +125,6 @@ const Insider = styled.div`
   flex-direction: column;
   justify-content: ${({ isEmpty }) => (isEmpty ? "center" : "flex-start")};
   align-items: ${({ isEmpty }) => (isEmpty ? "center" : "stretch")};
-  height: calc(100vh - 3.7rem); /* subtract Top bar */
 `;
 
 const Empty = styled.div`
@@ -132,7 +133,7 @@ const Empty = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-
+  margin-top: 8rem;
   width: 100vw;
 `;
 
@@ -163,7 +164,7 @@ const Top = styled.div`
   z-index: 999;
   box-shadow: rgba(0, 0, 0, 0.35) 0px -2px 8px 0px !important;
   border-radius: 29px 29px 0 0;
-  background: rgba(156, 122, 122, 0.1) !important;
+  background: rgba(234, 234, 234, 0.962) !important;
 
   backdrop-filter: blur(8px) !important;
   background: ${Colors.pureWhite};
@@ -226,50 +227,5 @@ const ImageContainer = styled.div`
   }
   @media (min-width: 321px) and (max-width: 499px) {
     /* min-height: 220px; */
-  }
-`;
-
-const ProductCard = styled.div`
-  position: relative;
-  background: ${Colors.pureWhite};
-  box-shadow: rgba(0, 0, 0, 0.06) 0px 2px 4px 0px;
-  border-radius: 8px;
-
-  transition: transform 0.3s ease-in-out;
-
-  img {
-    width: 100%;
-
-    height: 130px;
-
-    border-radius: 8px;
-    margin-bottom: 10px;
-    &:hover {
-      transform: scale(0.99);
-      box-shadow: ${Shadows.medium};
-    }
-  }
-  a {
-    text-decoration: none;
-    color: ${Colors.black};
-  }
-
-  h5 {
-    color: ${Colors.black};
-    font-size: 14px;
-    font-weight: 300;
-    margin: 0;
-    padding: 0 5px;
-  }
-
-  p {
-    font-weight: bold;
-    color: ${Colors.black};
-  }
-  span {
-    display: flex;
-    padding: 1px 0px 5px 5px;
-    justify-content: space-between;
-    align-items: center;
   }
 `;

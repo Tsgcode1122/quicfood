@@ -40,8 +40,8 @@ const QuantityControls = styled.div`
   justify-content: space-between;
   background: #e0e0e080;
   border-radius: 30px;
-  width: 90px;
-  padding: 1px;
+  width: 100px;
+  padding: 2px;
   span {
     min-width: 20px;
     text-align: center;
@@ -51,10 +51,10 @@ const CustomButton = styled.div`
   cursor: pointer;
   background: white;
   border-radius: 50%;
-  height: 20px;
+  height: 26px;
   display: flex;
   align-items: center;
   padding: 12px;
   justify-content: center;
-  width: 20px;
+  width: 26px;
 `;
