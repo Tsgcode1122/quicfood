@@ -31,7 +31,15 @@ const OrderConfirmation = ({ isOpen, onClose }) => {
 
   const placeOrder = (contactLink) => {
     if (cart.length === 0) return;
-    window.open(contactLink, "_blank");
+
+    if (window.innerWidth <= 500) {
+      // Redirect in the same tab for small screens
+      window.location.href = contactLink;
+    } else {
+      // Open in new tab for larger screens
+      window.open(contactLink, "_blank");
+    }
+
     clearCart();
     onClose(); // close modal after placing order
   };

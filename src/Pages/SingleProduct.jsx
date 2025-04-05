@@ -54,7 +54,13 @@ const SingleProduct = () => {
     const message = generateSingleProductMessage();
     const url = `https://wa.me/${phoneNumber}?text=${message}`;
 
-    window.open(url, "_blank");
+    if (window.innerWidth <= 500) {
+      // Redirect in the same tab for small screens
+      window.location.href = url;
+    } else {
+      // Open in new tab for larger screens
+      window.open(url, "_blank");
+    }
   };
 
   return (

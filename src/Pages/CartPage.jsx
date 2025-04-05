@@ -204,8 +204,6 @@ const Container = styled.div`
 
   height: 100%;
 
-  border-radius: 30px 30px 0 0;
-
   max-width: 600px;
 `;
 const CartContainer = styled.div`

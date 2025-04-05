@@ -113,7 +113,7 @@ const ProductCard = styled.div`
   box-shadow: rgba(0, 0, 0, 0.06) 0px 2px 4px 0px;
   border-radius: 8px;
   min-width: 160px;
-  max-width: 1px;
+  max-width: 161px;
   transition: transform 0.3s ease-in-out;
 
   img {
@@ -147,7 +147,7 @@ const ProductCard = styled.div`
   }
   span {
     display: flex;
-    padding: 1px 0px 5px 5px;
+    /* padding: 1px 0px 5px 5px; */
     justify-content: space-between;
     align-items: center;
   }
