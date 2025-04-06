@@ -59,9 +59,9 @@ const HeroSlider = () => {
       <AnimatePresence mode="wait">
         <SlideWrapper
           key={product[currentIndex].id}
-          initial={{ opacity: 0.95, scale: 1.01 }}
-          animate={{ opacity: 1, scale: 1 }}
-          exit={{ opacity: 0.9 }}
+          initial={{ opacity: 0.95 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0.95 }}
           transition={{ duration: 1, ease: "easeInOut" }}
         >
           <TextContent>
