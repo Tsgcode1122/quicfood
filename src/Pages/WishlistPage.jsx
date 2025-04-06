@@ -146,9 +146,10 @@ const Cancel = styled.div`
   display: flex;
   background: #ffffff;
   flex-direction: column;
-  height: 20px;
-  width: 20px;
-  border-radius: 5px;
+  height: 25px;
+  width: 25px;
+  justify-content: center;
+  border-radius: 0 5px 0 5px;
   align-items: center;
 
   svg {

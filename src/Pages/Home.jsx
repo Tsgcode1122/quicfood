@@ -14,8 +14,11 @@ const Home = () => {
   return (
     <>
       <HeroSlider />
+
       <NewItems />
+
       <BestSelling />
+
       {/* <Services /> */}
       {/* <Hero /> */}
       {/* <Services /> */}

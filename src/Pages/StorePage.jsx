@@ -161,6 +161,7 @@ const CustomSelect = styled(Select)`
 
   .ant-select-selection-item {
     font-weight: 500;
+    font-size: 16px !important;
   }
 
   &:hover .ant-select-selector {
@@ -174,6 +175,7 @@ const CustomSelect = styled(Select)`
 
   .ant-select-dropdown {
     border-radius: 10px;
+    font-size: 16px !important;
   }
 
   .ant-select-item-option-content {

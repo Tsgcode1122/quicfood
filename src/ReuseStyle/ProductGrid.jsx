@@ -9,7 +9,7 @@ const ProductGrid = styled.div`
   padding: 14px;
   background-color: ${Colors.pureWhite};
 
-  padding-bottom: 5rem;
+  padding-bottom: 3rem;
   position: relative;
 
   @media screen and (max-width: 499px) {

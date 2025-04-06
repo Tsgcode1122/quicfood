@@ -121,13 +121,22 @@ const CustomButton = styled.div`
   cursor: pointer;
   background: ${Colors.primaryRed};
   border-radius: 10px;
+  color: white;
   padding: 5px 10px;
+  min-width: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
 const BuyNowButton = styled.div`
   cursor: pointer;
   background: #ececec;
   border-radius: 10px;
   padding: 5px 10px;
+  min-width: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
 
 const Top = styled.div`

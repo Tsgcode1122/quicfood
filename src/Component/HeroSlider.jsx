@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { Colors } from "../Colors/ColorComponent";
 import products from "../Product/Products";
-
+import { motion, AnimatePresence } from "framer-motion";
 const HeroSlider = () => {
   const [product, setProduct] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -39,14 +39,11 @@ const HeroSlider = () => {
     const delta = touchStartX.current - touchEndX.current;
 
     if (delta > 50) {
-      // swipe left
       setCurrentIndex((prev) => (prev + 1) % product.length);
     } else if (delta < -50) {
-      // swipe right
       setCurrentIndex((prev) => (prev - 1 + product.length) % product.length);
     }
 
-    // reset values
     touchStartX.current = null;
     touchEndX.current = null;
   };
@@ -59,21 +56,29 @@ const HeroSlider = () => {
       onTouchMove={handleTouchMove}
       onTouchEnd={handleTouchEnd}
     >
-      <Slide key={product[currentIndex].id}>
-        <TextContent>
-          <h2>{product[currentIndex].name}</h2>
-          <p>{product[currentIndex].description}</p>
-          <StyledLink to={`/products/${product[currentIndex].id}`}>
-            View Product
-          </StyledLink>
-        </TextContent>
-        <ImageContainer>
-          <img
-            src={product[currentIndex].img}
-            alt={product[currentIndex].name}
-          />
-        </ImageContainer>
-      </Slide>
+      <AnimatePresence mode="wait">
+        <SlideWrapper
+          key={product[currentIndex].id}
+          initial={{ opacity: 0.95, scale: 1.01 }}
+          animate={{ opacity: 1, scale: 1 }}
+          exit={{ opacity: 0.9 }}
+          transition={{ duration: 1, ease: "easeInOut" }}
+        >
+          <TextContent>
+            <h2>{product[currentIndex].name}</h2>
+            <p>{product[currentIndex].description}</p>
+            <StyledLink to={`/products/${product[currentIndex].id}`}>
+              View Product
+            </StyledLink>
+          </TextContent>
+          <ImageContainer>
+            <img
+              src={product[currentIndex].img}
+              alt={product[currentIndex].name}
+            />
+          </ImageContainer>
+        </SlideWrapper>
+      </AnimatePresence>
 
       <Indicators>
         {product.map((_, index) => (
@@ -101,17 +106,16 @@ const HeroContainer = styled.div`
   position: relative;
   overflow: hidden;
 `;
-
-const Slide = styled.div`
+const SlideWrapper = styled(motion.div)`
   width: 100%;
   max-width: 1200px;
   display: grid;
   align-items: center;
   grid-template-columns: 4.8fr 5.2fr;
   gap: 10px;
-  transition: opacity 1s ease-in-out;
   background: #f0f0f0b2;
   border-radius: 20px;
+  overflow: hidden;
 `;
 
 const TextContent = styled.div`

@@ -20,15 +20,16 @@ const BestSelling = () => {
 
   return (
     <>
+      <Line />
       <Heading>
-        <h4>Best Selling</h4>
+        <h3>Best Selling</h3>
 
         <CtaButton to="/storepage">
           View All
           <ArrowDownOutlined />
         </CtaButton>
       </Heading>
-      <ProductGrid>
+      <ProductGrid style={{ paddingBottom: "6rem" }}>
         {bestSellingProducts.length > 0 ? (
           bestSellingProducts.map((product) => (
             <ProductCard key={product.id}>
@@ -72,19 +73,22 @@ const Heading = styled.div`
   align-items: center;
   width: 100%;
   gap: 15px;
-  padding: 1rem;
+  padding: 0rem 1rem 0 1rem;
+
   justify-content: space-between;
-  h4 {
-    color: ${Colors.ashBlack};
-    font-weight: 600;
+  h3 {
+    /* color: ${Colors.ashBlack}; */
+    /* font-weight: 600; */
+    font-size: 17px;
     white-space: nowrap;
   }
 `;
 
 const Line = styled.div`
   flex-grow: 1;
-  height: 1px;
-  background: #aaaaaa;
+  height: 0.7px;
+  background: #e8e8e8;
+  margin: 0rem 1rem 2rem 1rem;
 `;
 
 const CtaButton = styled(Link)`

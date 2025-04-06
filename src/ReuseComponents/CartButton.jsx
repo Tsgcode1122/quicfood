@@ -7,7 +7,7 @@ import { Colors, Shadows } from "../Colors/ColorComponent";
 
 const Button = styled.button`
   background: ${Colors.pureWhite};
-  color: ${Colors.primaryRed};
+  color: ${Colors.black};
   border: none;
   padding: 8px;
   font-size: 14px;

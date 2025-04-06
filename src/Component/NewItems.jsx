@@ -15,7 +15,7 @@ const NewItems = () => {
   return (
     <>
       <Heading>
-        <h4>Newest </h4>
+        <h3>Newest </h3>
 
         <CtaButton to="/storepage">
           View All
@@ -66,12 +66,13 @@ const Heading = styled.div`
   align-items: center;
   width: 100%;
   gap: 15px;
-  padding: 1rem;
+  padding: 0 1rem;
   margin-top: 2rem;
   justify-content: space-between;
-  h4 {
-    color: ${Colors.ashBlack};
-    font-weight: 600;
+  h3 {
+    /* color: ${Colors.ashBlack}; */
+    /* font-wei-ght: 600; */
+    font-size: 19px;
     white-space: nowrap;
   }
 `;
