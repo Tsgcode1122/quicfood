@@ -40,8 +40,8 @@ const OrderConfirmation = ({ isOpen, onClose }) => {
       window.open(contactLink, "_blank");
     }
 
-    clearCart();
-    onClose(); // close modal after placing order
+    onClose();
+    clearCart(); // close modal after placing order
   };
 
   return (
