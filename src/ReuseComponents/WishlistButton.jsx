@@ -1,48 +1,78 @@
 import React, { useState, useEffect } from "react";
+import toast, { Toaster } from "react-hot-toast";
 import { CiHeart } from "react-icons/ci";
-import { message } from "antd";
-import styled from "styled-components";
 import { FaHeart } from "react-icons/fa6";
-import { useLocation } from "react-router-dom";
+import styled from "styled-components";
 import { Colors } from "../Colors/ColorComponent";
 
 const WishlistButton = ({ product, showTextButton = false }) => {
   const [isInWishlist, setIsInWishlist] = useState(false);
-  const [messageApi, contextHolder] = message.useMessage();
 
-  // Check if the product is already in the wishlist (from localStorage)
   useEffect(() => {
     const wishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
     setIsInWishlist(wishlist.some((item) => item.id === product.id));
   }, [product.id]);
 
-  // Add product to wishlist
+  const showToast = (message) => {
+    toast.custom((t) => (
+      <ToastContent visible={t.visible}>
+        <img src={product.img} alt={product.name} />
+        <span>{message}</span>
+      </ToastContent>
+    ));
+  };
+  const ToastContent = styled.div`
+    display: flex;
+    align-items: center;
+    background: ${Colors.black};
+    color: ${Colors.pureWhite};
+    padding: 10px 14px;
+    border-radius: 20px;
+    gap: 10px;
+    box-shadow: 0 5px 15px rgba(241, 241, 241, 0.2);
+    img {
+      max-width: 100%;
+      width: 30px;
+      height: 30px;
+      margin: 0;
+      border-radius: 5px;
+    }
+  `;
+
   const addToWishlist = () => {
     try {
       let wishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
 
       if (isInWishlist) {
-        // Remove from wishlist
         wishlist = wishlist.filter((item) => item.id !== product.id);
         setIsInWishlist(false);
-        messageApi.success("Removed from wishlist");
+        showToast("Removed from wishlist");
       } else {
-        // Add to wishlist
         wishlist.push(product);
         setIsInWishlist(true);
-        messageApi.success("Added to wishlist");
+        showToast("Added to wishlist");
       }
 
       localStorage.setItem("wishlist", JSON.stringify(wishlist));
     } catch (error) {
       console.error("Wishlist update error:", error);
-      messageApi.error("Failed to update wishlist.");
+      toast.error("Failed to update wishlist.");
     }
   };
 
   return (
     <>
-      {contextHolder} {/* Required for messages to work */}
+      <Toaster
+        position="bottom-center"
+        toastOptions={{
+          duration: 4000,
+          style: {
+            background: "transparent",
+            boxShadow: "none",
+            padding: 0,
+          },
+        }}
+      />
       {showTextButton ? (
         <WishlistTextButton onClick={addToWishlist} disabled={isInWishlist}>
           {isInWishlist ? <span>Added to Wishlist</span> : "Add to Wishlist"}

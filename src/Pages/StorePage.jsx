@@ -183,16 +183,6 @@ const CustomSelect = styled(Select)`
   }
 `;
 
-const DropdownIcon = styled(FiChevronDown)`
-  position: absolute;
-  /* right: 10px; */
-  top: 50%;
-  transform: translateY(-50%);
-  pointer-events: none;
-  color: ${Colors.black};
-  font-size: 16px;
-`;
-
 const SpinnerContainer = styled.div`
   display: flex;
   justify-content: center;
@@ -271,50 +261,6 @@ const SearchInput = styled.input`
   }
 `;
 
-const CategorySelect = styled.select`
-  padding: 10px;
-  border-radius: 5px;
-  border: none !important;
-  background-color: transparent !important;
-  font-size: 16px;
-  color: ${Colors.black} !important;
-  color: ${Colors.black};
-  appearance: none;
-  -webkit-appearance: none; /* Hide on Safari */
-  -moz-appearance: none; /* Hide on Firefox */
-  cursor: pointer;
-`;
-
-const SortSelect = styled.select`
-  padding: 10px;
-  color: ${Colors.black};
-  appearance: none;
-  -webkit-appearance: none; /* Hide on Safari */
-  -moz-appearance: none; /* Hide on Firefox */
-  cursor: pointer;
-  border-radius: 5px;
-  border: none !important;
-  color: ${Colors.black} !important;
-  background-color: transparent !important;
-
-  font-size: 16px;
-  &:focus {
-    border-color: #ccc !important;
-    box-shadow: none;
-  }
-
-  /* Remove hover effect */
-  &:hover {
-    border-color: #ccc !important;
-    border: none !important;
-  }
-
-  option {
-    font-weight: bold !important;
-    color: black !important;
-  }
-`;
-
 const ProductGrid = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
@@ -324,7 +270,7 @@ const ProductGrid = styled.div`
   background-color: ${Colors.pureWhite};
   padding-top: 5rem;
   padding-bottom: 5rem;
-  position: relative;
+
   @media screen and (max-width: 499px) {
     gap: 15px;
     grid-template-columns: repeat(2, minmax(140px, 1fr));
