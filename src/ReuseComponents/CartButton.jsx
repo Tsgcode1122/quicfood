@@ -68,7 +68,7 @@ const CartButton = ({ product }) => {
           </ToastContent>
         ),
         {
-          duration: 4000, // ⏱ Custom duration in ms
+          duration: 3000, // ⏱ Custom duration in ms
         },
       );
 
@@ -81,18 +81,6 @@ const CartButton = ({ product }) => {
 
   return (
     <>
-      <Toaster
-        position="bottom-center"
-        toastOptions={{
-          style: {
-            background: "#000",
-            color: "#fff",
-            fontSize: "13px",
-            borderRadius: "8px",
-            padding: "10px 14px",
-          },
-        }}
-      />
       <Button onClick={handleAddToCart}>
         <FiShoppingCart />
       </Button>

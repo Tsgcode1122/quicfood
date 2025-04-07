@@ -5,7 +5,7 @@ import {
   RouterProvider,
   useNavigate,
 } from "react-router-dom";
-// import "antd/dist/reset.css";
+import { Toaster } from "react-hot-toast";
 import { Result, Button } from "antd";
 import Layout from "./FixedComponent/Layout";
 import GlobalStyle from "./FixedComponent/GlobalStyles";
@@ -87,7 +87,18 @@ const App = () => (
   <>
     {/* <PageUnderConstruction /> */}
     <GlobalStyle />
-
+    <Toaster
+      position="bottom-center"
+      toastOptions={{
+        style: {
+          background: "#000",
+          color: "#fff",
+          fontSize: "13px",
+          borderRadius: "8px",
+          padding: "10px 14px",
+        },
+      }}
+    />
     <RouterProvider router={router} />
   </>
 );

@@ -1,11 +1,11 @@
 import React, { useState, useContext, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import products from "../Product/Products"; // Make sure the path is correct
-import { FiShoppingCart } from "react-icons/fi";
+import toast, { Toaster } from "react-hot-toast";
 import { MdArrowBack } from "react-icons/md";
 import { CartContext } from "../Context/CartContext";
 import QuantityControl from "../ReuseComponents/QuantityControl";
-import { Button, message } from "antd"; // Ant Design Button for Add to Cart
+
 import styled from "styled-components";
 import CartItemCount from "../ReuseComponents/CartItemCount";
 import { Colors, Shadows } from "../Colors/ColorComponent";
@@ -18,7 +18,7 @@ const SingleProduct = () => {
   });
   const { productId } = useParams();
   const product = products.find((p) => p.id === productId);
-  const [messageApi, contextHolder] = message.useMessage();
+
   const navigate = useNavigate();
 
   const { addToCart } = useContext(CartContext);
@@ -31,8 +31,19 @@ const SingleProduct = () => {
 
   const handleAddToCart = () => {
     addToCart({ ...product, quantity });
-
-    messageApi.success(`${product.name} (x${quantity}) added to cart!`);
+    toast.custom(
+      (t) => (
+        <ToastContent>
+          <img src={product.img} alt={product.name} />
+          <span>
+            {product.name} x{quantity} added to cart!
+          </span>
+        </ToastContent>
+      ),
+      {
+        duration: 3000, // ⏱ Custom duration in ms
+      },
+    );
   };
 
   const back = () => {
@@ -62,10 +73,25 @@ const SingleProduct = () => {
       window.open(url, "_blank");
     }
   };
-
+  const ToastContent = styled.div`
+    display: flex;
+    align-items: center;
+    background: ${Colors.black};
+    color: ${Colors.pureWhite};
+    padding: 10px 14px;
+    border-radius: 20px;
+    gap: 10px;
+    box-shadow: 0 5px 15px rgba(241, 241, 241, 0.2);
+    img {
+      max-width: 100%;
+      width: 30px;
+      height: 30px;
+      margin: 0;
+      border-radius: 5px;
+    }
+  `;
   return (
     <>
-      {contextHolder}
       <Container>
         <Top>
           <Back onClick={back}>

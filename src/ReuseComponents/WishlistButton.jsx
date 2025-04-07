@@ -62,17 +62,6 @@ const WishlistButton = ({ product, showTextButton = false }) => {
 
   return (
     <>
-      <Toaster
-        position="bottom-center"
-        toastOptions={{
-          duration: 4000,
-          style: {
-            background: "transparent",
-            boxShadow: "none",
-            padding: 0,
-          },
-        }}
-      />
       {showTextButton ? (
         <WishlistTextButton onClick={addToWishlist} disabled={isInWishlist}>
           {isInWishlist ? <span>Added to Wishlist</span> : "Add to Wishlist"}
