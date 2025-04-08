@@ -81,8 +81,9 @@ const WishlistPage = () => {
                     <ImageContainer>
                       <img src={item.img} alt={item.name} />
                     </ImageContainer>
-                    <h5>{item.name}</h5>
                   </Link>
+                  <h5>{item.name}</h5>
+
                   <div className="details">
                     <span>
                       <p>${item.price.toFixed(2)}</p>
