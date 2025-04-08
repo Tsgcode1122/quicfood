@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { Button } from "antd";
 import styled from "styled-components";
-
+import { IoAddOutline } from "react-icons/io5";
+import { RxMinus } from "react-icons/rx";
 const QuantityControl = ({ onQuantityChange }) => {
   const [quantity, setQuantity] = useState(1);
 
@@ -25,9 +26,13 @@ const QuantityControl = ({ onQuantityChange }) => {
 
   return (
     <QuantityControls>
-      <CustomButton onClick={handleDecrease}>-</CustomButton>
+      <CustomButton onClick={handleDecrease}>
+        <RxMinus />
+      </CustomButton>
       <span>{quantity}</span>
-      <CustomButton onClick={handleIncrease}>+</CustomButton>
+      <CustomButton onClick={handleIncrease}>
+        <IoAddOutline />
+      </CustomButton>
     </QuantityControls>
   );
 };
@@ -54,7 +59,10 @@ const CustomButton = styled.div`
   height: 26px;
   display: flex;
   align-items: center;
-  padding: 12px;
+  padding: 5px;
   justify-content: center;
   width: 26px;
+  svg {
+    font-weight: 100 !important;
+  }
 `;

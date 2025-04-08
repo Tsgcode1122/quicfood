@@ -5,7 +5,8 @@ import styled from "styled-components";
 import { Link, useNavigate } from "react-router-dom";
 import { MdClear, MdArrowBack } from "react-icons/md";
 import { Colors, Shadows } from "../Colors/ColorComponent";
-import { IoChevronBack } from "react-icons/io5";
+import { IoAddOutline } from "react-icons/io5";
+import { RxMinus } from "react-icons/rx";
 import { GiShoppingCart } from "react-icons/gi";
 import { AiOutlineDelete } from "react-icons/ai";
 import OrderConfirmation from "../Component/OrderConfirmation";
@@ -73,7 +74,7 @@ const CartPage = () => {
                           }
                           disabled={item.quantity <= 1}
                         >
-                          -
+                          <RxMinus />
                         </CustomButton>
                         <span>{item.quantity}</span>
                         <CustomButton
@@ -81,7 +82,7 @@ const CartPage = () => {
                             updateQuantity(item.id, item.quantity + 1)
                           }
                         >
-                          +
+                          <IoAddOutline />
                         </CustomButton>
                       </QuantityControl>
                     </div>
@@ -263,9 +264,12 @@ const CustomButton = styled.div`
   height: 20px;
   display: flex;
   align-items: center;
-  padding: 12px;
+  padding: 2px;
   justify-content: center;
   width: 20px;
+  svg {
+    color: black;
+  }
 `;
 const Summary = styled.div`
   margin-top: 20px;
