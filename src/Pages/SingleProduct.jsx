@@ -45,6 +45,7 @@ const SingleProduct = () => {
         duration: 3000, // ⏱ Custom duration in ms
       },
     );
+    navigate("/storepage");
   };
 
   const back = () => {
