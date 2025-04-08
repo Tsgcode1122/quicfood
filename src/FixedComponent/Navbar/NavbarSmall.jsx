@@ -51,7 +51,7 @@ const NavbarSmall = () => {
 
   return (
     <>
-      <StyledNavbar style={{ top: visible ? 0 : "-5rem" }}>
+      <StyledNavbar>
         <Logo>
           Quic<span>Food</span>
         </Logo>
@@ -59,7 +59,7 @@ const NavbarSmall = () => {
           {showModal ? <TbX /> : <TbMenu3 />}
         </Menu>
       </StyledNavbar>
-
+      {showModal && <Overlay onClick={() => setShowModal(false)} />}
       <MenuModal $show={showModal} ref={modalRef}>
         <ul>
           <li onClick={() => handleNavigate("/about")}>About Us</li>
@@ -80,6 +80,16 @@ const Logo = styled.div`
   span {
     color: ${Colors.primaryRed};
   }
+`;
+const Overlay = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.3);
+  z-index: 997;
+  /* backdrop-filter: blur(2px); */
 `;
 
 const StyledNavbar = styled.nav`
