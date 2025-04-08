@@ -15,7 +15,8 @@ import WishlistButton from "../ReuseComponents/WishlistButton";
 const SingleProduct = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
-  });
+  }, []);
+
   const { productId } = useParams();
   const product = products.find((p) => p.id === productId);
 
